@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""cat function """
-
-
 import copy
+""" cat fn """
 
 
 def cat_matrices2D(mat1, mat2, axis=0):

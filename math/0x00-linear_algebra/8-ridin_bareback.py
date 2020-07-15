@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
+""" mat_mul"""
+
+
 def mat_mul(mat1, mat2):
+    """ mat function """
     li1, li2 = len(mat1), len(mat2)
     col1, col2 = len(mat1[0]), len(mat2[0])
     if col1 == li2:
