@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+""" matrix trans"""
+
+
 def matrix_transpose(matrix):
     len1, len2 = len(matrix), len(matrix[0])
     s = []
