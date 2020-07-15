@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 def matrix_shape(matrix):
+    """ matrix shappe """
     lis = [len(matrix)]
     while(type(matrix[0]) == list):
         lis.append(len(matrix[0]))
