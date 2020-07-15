@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+""" new fn """
+
+
 def matrix_shape(matrix):
     """ matrix shappe """
     lis = [len(matrix)]
