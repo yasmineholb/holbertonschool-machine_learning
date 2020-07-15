@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-""" doc"""
+""" matmul function"""
 import numpy as np
-""" matmul function """
 
 
 def np_matmul(mat1, mat2):
