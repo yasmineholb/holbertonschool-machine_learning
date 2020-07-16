@@ -3,6 +3,7 @@
 
 
 def np_slice(matrix, axes={}):
+    """ new function"""
     new = []
     for val in range(len(matrix.shape)):
         t = slice(*axes.get(val, (None, None)))
