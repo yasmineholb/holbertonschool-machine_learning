@@ -5,7 +5,7 @@ import numpy as np
 
 def np_slice(matrix, axes={}):
     new = []
-    for key, value in axes.items():
-        new.append(slice(None))
-        new.append(slice(*value))
+    for val in range(len(matrix)):
+        t = slice(*axes.get(val, (None, None)))
+        new.append(t)
     return(matrix[tuple(new)])
