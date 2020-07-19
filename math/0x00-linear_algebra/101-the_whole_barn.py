@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
 """ function"""
-import numpy as np
+
+
+def matrix_shape(matrix):
+    """shape function """
+    L = [len(matrix)]
+    while type(matrix[0]) == list:
+        L.append(len(matrix[0]))
+        matrix = matrix[0]
+    return L
+
 
 def add_matrices(mat1, mat2):
-    """add function """
-    m1=np.asarray(mat1)
-    m2=np.asarray(mat2)
-    s=np.shape(m1)
-    ss=np.shape(m2)
-    if s == ss:
-        if len(s) == 1:
-            return np.ndarray.tolist(m1+m2)
-        else:
-            S=np.zeros(s)
-            for i in range(s[0]):
-                S[i,:]=m1[i,:]+m2[i,:]
-        return(np.ndarray.tolist(S))
+    """ Add function """
+    m = matrix_shape(mat1)
+    if m != matrix_shape(mat2):
+        return None
     else:
-        return(None)
+        lis = []
+        if len(m) > 1:
+            for sub1, sub2 in zip(mat1, mat2):
+                lis.append(add_matrices(sub1, sub2))
+        else:
+            for i in range(m[0]):
+                lis.append(mat1[i] + mat2[i])
+    return lis
