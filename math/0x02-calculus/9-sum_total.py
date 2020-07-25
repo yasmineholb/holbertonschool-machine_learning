@@ -8,4 +8,6 @@ def summation_i_squared(n):
         return None
     if n is None or n < 1:
         return(None)
+    if n == 1:
+        return 1
     return(int(((1/3)*(n**3))+((1/2)*(n**2))+(1/6)*n))
