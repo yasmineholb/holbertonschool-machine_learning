@@ -12,9 +12,6 @@ def poly_integral(poly, C=0):
         return None
     lis = [C]
     for i in range(len(poly)):
-        if type(poly[i]) is not int and type(poly[i]) is not float:
-            return(None)
-    for i in range(len(poly)):
         if int(poly[i]/(i+1)) == poly[i]/(i+1):
             lis.append(int(poly[i]/(i+1)))
         else:
