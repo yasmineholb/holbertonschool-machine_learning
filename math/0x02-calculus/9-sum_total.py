@@ -4,7 +4,7 @@
 
 def summation_i_squared(n):
     """sum function """
-    if type(n) is not int:
+    if type(n) is not int and type(n) is not float:
         return None
     if n is None or n < 1:
         return(None)
