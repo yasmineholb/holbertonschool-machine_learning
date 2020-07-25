@@ -7,6 +7,8 @@ def poly_derivative(poly):
     x = 0
     m = []
     p = [0]
+    if type(poly) is not list:
+        return None
     if len(poly) == 0:
         return None
     if len(poly) == 1:
