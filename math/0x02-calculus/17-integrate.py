@@ -20,5 +20,3 @@ def poly_integral(poly, C=0):
             else:
                 lis.append(poly[i]/(i+1))
         return lis
-    else:
-        return None
