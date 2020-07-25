@@ -9,6 +9,9 @@ def poly_derivative(poly):
     p = [0]
     if len(poly) == 1:
         return(p)
+    for i in range(len(poly)):
+        if type(poly[i]) is not int or type(poly[i]) is not int:
+            return(None)
     if poly is None:
         return None
     for i in range(1, len(poly)):
