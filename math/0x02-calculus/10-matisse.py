@@ -3,6 +3,7 @@
 
 
 def poly_derivative(poly):
+    """ function derivate"""
     x = 0
     m = []
     p = [0]
