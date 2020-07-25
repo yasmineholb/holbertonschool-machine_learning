@@ -11,6 +11,8 @@ def poly_integral(poly, C=0):
     elif C < 0:
         return None
     lis = [C]
+    if len(poly) == 1 and poly[0] == 0:
+        return lis
     for i in range(len(poly)):
         if type(poly[i]) is not int and type(poly[i]) is not float:
             return(None)
