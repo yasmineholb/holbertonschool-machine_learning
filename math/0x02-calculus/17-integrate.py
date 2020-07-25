@@ -8,6 +8,8 @@ def poly_integral(poly, C=0):
         return None
     elif poly == []:
         return None
+    elif poly is None or C is None:
+        return None
     elif type(poly) == list:
         lis = [C]
     for i in range(len(poly)):
