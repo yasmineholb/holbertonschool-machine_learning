@@ -6,8 +6,6 @@ def poly_integral(poly, C=0):
     """ function """
     if (type(C) is not int and type(C) is not float) or type(poly) is not list:
         return None
-    elif poly == []:
-        return None
     elif poly is None or C is None:
         return None
     elif type(poly) == list:
