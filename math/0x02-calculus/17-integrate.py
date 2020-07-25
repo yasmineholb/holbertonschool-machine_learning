@@ -4,12 +4,12 @@
 
 def poly_integral(poly, C=0):
     """ function """
-    if (type(C) is not int and type(C) is not float) or type(poly) is not list:
+    """if (type(C) is not int and type(C) is not float) or type(poly) is not list:
         return None
     elif poly is None or C is None:
         return None
     elif C < 0:
-        return None
+        return None"""
     lis = [C]
     for i in range(len(poly)):
         if type(poly[i]) is not int and type(poly[i]) is not float:
