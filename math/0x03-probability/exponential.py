@@ -17,17 +17,3 @@ class Exponential:
             elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(len(data)/sum(data))
-
-    def pdf(self, x):
-        """ pdf """
-        if x > self.lambtha:
-            return(0)
-        p = self.lambtha * (2.7182818285**(-self.lambtha * x))
-        return(p)
-
-    def cdf(self, x):
-        """cdf"""
-        if x > self.lambtha:
-            return(0)
-        p = 1 - (2.7182818285**(-self.lambtha * x))
-        return(p)
