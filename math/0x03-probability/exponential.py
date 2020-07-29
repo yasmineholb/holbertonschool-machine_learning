@@ -20,8 +20,6 @@ class Exponential:
 
     def pdf(self, x):
         """ pdf """
-        if x > self.lambtha:
-            return(0)
         p = self.lambtha * (2.7182818285**(-self.lambtha * x))
         return(p)
 
