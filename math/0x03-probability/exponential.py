@@ -5,6 +5,7 @@
 class Exponential:
     """ Exponential """
     def __init__(self, data=None, lambtha=1.):
+        """ fn """
         self.data = data
         if data is None:
             self.lambtha = float(lambtha)
