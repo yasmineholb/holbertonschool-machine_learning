@@ -10,7 +10,7 @@ class Exponential:
         else:
             raise ValueError("lambtha must be a positive value")
         if data is None:
-            data = self.lambtha
+            self.lambtha = float(lambtha)
             if lambtha < 0:
                 raise ValueError("lambtha must be a positive value")
         elif data:
