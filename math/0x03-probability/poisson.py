@@ -6,19 +6,19 @@ class Poisson:
     """class"""
     def __init__(self, data=None, lambtha=1.):
         """ function """
-        """self.data = data"""
+        self.data = data
         self.lambtha = float(lambtha)
         if data is None:
-            data = self.lambtha
+            self.lambtha = float(lambtha)
             if lambtha < 0:
                 raise ValueError("lambtha must be a positive value")
-        elif data:
-            self.lambtha = float(sum(data)/len(data))
+        else:
             if type(data) is not list:
                 raise TypeError("data must be a list")
-            elif len(data) < 2:
+            elif len(data) < 3:
                 raise ValueError("data must contain multiple values")
-
+            self.lambtha = float(sum(data)/len(data))
+        
     def factt(self, k):
         """ factorial function """
         f = 1
