@@ -7,7 +7,7 @@ class Poisson:
     def __init__(self, data=None, lambtha=1.):
         """ function """
         self.data = data
-        self.lambtha = float(lambtha)
+        """self.lambtha = float(lambtha)"""
         if data is None:
             self.lambtha = float(lambtha)
             if lambtha < 0:
