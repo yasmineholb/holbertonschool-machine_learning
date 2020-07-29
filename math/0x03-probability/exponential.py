@@ -5,7 +5,10 @@
 class Exponential:
     """ Exponential """
     def __init__(self, data=None, lambtha=1.):
-        self.lambtha = float(lambtha)
+        if type(lambtha) is int or float:
+            self.lambtha = float(lambtha)
+        else:
+            raise ValueError("lambtha must be a positive value")
         if data is None:
             data = self.lambtha
             if lambtha < 0:
