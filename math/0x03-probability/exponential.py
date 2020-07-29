@@ -16,3 +16,9 @@ class Exponential:
                 raise TypeError("data must be a list")
             elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
+
+    def pdf(self, x):
+        if x > self.lambtha:
+            return(0)
+        p = self.lambtha * (2.7182818285**(-self.lambtha * x))
+        return(p)
