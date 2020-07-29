@@ -35,3 +35,14 @@ class Poisson:
             return(0)
         p = ((2.7182818285**(-self.lambtha))*(self.lambtha**k))/self.factt(k)
         return(float(p))
+
+    def cdf(self, k):
+        """ cdf function """
+        t = self.lambtha
+        k = int(k)
+        p = 0
+        if k < self.lambtha:
+            return(0)
+        for i in range(k + 1):
+            p = p + ((2.7182818285**(-t))*(t**i))/self.factt(i)
+        return(p)
