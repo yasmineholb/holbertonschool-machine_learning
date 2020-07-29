@@ -3,9 +3,10 @@
 
 
 class Poisson:
+    """class"""
     def __init__(self, data=None, lambtha=1.):
         """ function """
-        self.data = data
+        self.__data = data
         self.lambtha = float(lambtha)
         if data is None:
             data = lambtha
