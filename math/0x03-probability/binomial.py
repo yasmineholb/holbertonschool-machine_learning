@@ -38,7 +38,7 @@ class Binomial:
     def pmf(self, k):
         """ pmf function """
         k = int(k)
-        if k <= 0:
+        if k < 0:
             return 0
         return (self.p ** k) * ((1 - self.p) ** (1 - k))
 
