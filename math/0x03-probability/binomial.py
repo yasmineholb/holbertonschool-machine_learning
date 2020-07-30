@@ -40,6 +40,7 @@ class Binomial:
         return (self.p ** k) * ((1 - self.p) ** (1 - k))
 
     def cal(self, k):
+        """ cal function """
         t = self.n - k
         return self.factt(self.n)/(self.factt(t) * self.factt(k))
 
