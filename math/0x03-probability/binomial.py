@@ -22,3 +22,22 @@ class Binomial:
             self.p = (sum(data)/len(data))/p*0.01
             self.n = round(len(data)/2)
             """self.p = len(data)/self.n"""
+
+    def factt(self, k):
+        """ factorial function """
+        f = 1
+        if k == 0:
+            return 1
+        for i in range(1, k+1):
+            f = f * i
+        return f
+    
+    def pmf(self, k):
+        """ pmf function """
+        k = int(k)
+        if k <= 0:
+            return 0
+        """t = self.n - k"""
+        return (self.p ** k) * ((1 -self.p) ** (1-k))
+        """return self.factt(self.n)/(self.factt(p) * self.factt(k))"""
+        
