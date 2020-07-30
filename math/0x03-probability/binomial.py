@@ -23,7 +23,7 @@ class Binomial:
             var = [(i - mean)**2 for i in data]
             cat = sum(var)/len(data)
             self.p = 1 - (cat/mean)
-            self.n = round(mean/self.p)
+            self.n = int(round(mean/self.p))
             self.p = mean/self.n
 
     def factt(self, k):
