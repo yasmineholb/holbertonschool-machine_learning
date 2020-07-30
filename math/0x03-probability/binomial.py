@@ -19,9 +19,12 @@ class Binomial:
                 raise TypeError("data must be a list")
             elif len(data) < 2:
                 raise ValueError("data must contain multiple values")
-            self.p = (sum(data)/len(data))/p*0.01
-            self.n = round(len(data)/2)
-            """self.p = len(data)/self.n"""
+            mean = sum(data)/len(data)
+            var = [(i - mean)**2 for i in data]
+            cat = sum(var)/len(data)
+            self.p = 1 - (cat/mean)
+            self.n = round(mean/self.p)
+            self.p = mean/self.n
 
     def factt(self, k):
         """ factorial function """
