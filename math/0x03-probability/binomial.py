@@ -35,17 +35,17 @@ class Binomial:
             f = f * i
         return f
 
+    def cal(self, k):
+        """ cal function """
+        t = self.n - k
+        return self.factt(self.n)/(self.factt(t) * self.factt(k))
+
     def pmf(self, k):
         """ pmf function """
         k = int(k)
         if k < 0:
             return 0
-        return (self.p ** k) * ((1 - self.p) ** (1 - k))
-
-    def cal(self, k):
-        """ cal function """
-        t = self.n - k
-        return self.factt(self.n)/(self.factt(t) * self.factt(k))
+        return (self.p ** k) * ((1 - self.p) ** (self.n - k)) * self.cal(k)
 
     def cdf(self, k):
         """ cdf function """
