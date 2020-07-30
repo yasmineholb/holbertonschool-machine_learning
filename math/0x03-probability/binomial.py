@@ -31,13 +31,12 @@ class Binomial:
         for i in range(1, k+1):
             f = f * i
         return f
-    
+
     def pmf(self, k):
         """ pmf function """
         k = int(k)
         if k <= 0:
             return 0
-        """t = self.n - k"""
-        return (self.p ** k) * ((1 -self.p) ** (1-k))
-        """return self.factt(self.n)/(self.factt(p) * self.factt(k))"""
-        
+        t = self.n - k
+        """return (self.p ** k) * ((1 - self.p) ** (1 - k))"""
+        return self.factt(self.n)/(self.factt(t) * self.factt(k))
