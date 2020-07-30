@@ -37,6 +37,16 @@ class Binomial:
         k = int(k)
         if k <= 0:
             return 0
+        return (self.p ** k) * ((1 - self.p) ** (1 - k))
+
+    def cal(self, k):
         t = self.n - k
-        """return (self.p ** k) * ((1 - self.p) ** (1 - k))"""
         return self.factt(self.n)/(self.factt(t) * self.factt(k))
+
+    def cdf(self, k):
+        """ cdf function """
+        k = int(k)
+        if k < 0:
+            return 0
+        for i in range(k+1):
+            return self.pmf(k) * self.cal(k)
