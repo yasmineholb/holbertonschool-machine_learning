@@ -8,7 +8,7 @@ class Binomial:
         """ function """
         self.data = data
         if data is None:
-            self.n = round(int(n))
+            self.n = int(n)
             self.p = float(p)
             if n <= 0:
                 raise ValueError("n must be a positive value")
