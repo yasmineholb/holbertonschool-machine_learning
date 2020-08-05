@@ -40,5 +40,5 @@ class Neuron():
     def cost(self, Y, A):
         """ cost function """
         m = Y.shape[1]
-        cos = -(np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))) 
+        cos = -(np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)))
         return cos/m
