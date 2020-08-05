@@ -34,5 +34,5 @@ class Neuron():
         """ forward function """
         nx, m = np.shape(X)
         z = np.matmul(self.__W, X) + self.__b
-        self.__A = 1/(1 + (2.7182818285**(-z)))
+        self.__A = 1/(1 + (np.exp(-z)))
         return self.__A
