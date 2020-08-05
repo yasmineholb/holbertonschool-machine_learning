@@ -9,7 +9,7 @@ class Neuron():
         """ init function """
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
-        elif nx < 1:
+        if nx < 1:
             raise TypeError("nx must be a positive integer")
         self.nx = nx
         self.W = np.random.randn(1, nx)
