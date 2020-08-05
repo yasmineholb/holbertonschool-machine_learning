@@ -15,7 +15,3 @@ class Neuron():
         self.W = np.random.randn(1, nx)
         self.b = 0
         self.A = 0
-
-    W = np.random.randn()
-    b = 0
-    A = 0
