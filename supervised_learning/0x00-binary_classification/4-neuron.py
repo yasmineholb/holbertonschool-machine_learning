@@ -46,7 +46,6 @@ class Neuron():
     def evaluate(self, X, Y):
         """ evaluate function """
         z = self.forward_prop(X)
-        s = []
-        for i in range(np.shape(z)[1]):
-            s.append(int(z[0, i] >= 0.5))
-        return np.asarray([s]), self.cost(Y, z)
+        s = z[0, :] > 0.5
+        ss = np.array([int(x) for x in s])
+        return ss, self.cost(Y, z)
