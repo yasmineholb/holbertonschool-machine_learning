@@ -48,5 +48,5 @@ class Neuron():
         z = self.forward_prop(X)
         s = []
         for i in range(np.shape(z)[1]):
-            s.append(int(z[0, i] > 0.5))
-        return [s], self.cost(Y, z)
+            s.append(int(z[0, i] >= 0.5))
+        return np.asarray([s]), self.cost(Y, z)
