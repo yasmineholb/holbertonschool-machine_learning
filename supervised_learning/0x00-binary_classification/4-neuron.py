@@ -47,4 +47,4 @@ class Neuron():
         """ evaluate function """
         z = self.forward_prop(X)
         s = np.round(z)
-        return s, self.cost(Y, z)
+        return s.astype(np.int), self.cost(Y, z)
