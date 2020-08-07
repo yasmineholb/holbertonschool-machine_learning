@@ -55,4 +55,3 @@ class Neuron():
         p = self.forward_prop(X) - Y
         self.__W = self.__W - (alpha/m) * np.sum((p)*X, axis=1)
         self.__b = self.__b - (alpha/m) * sum(sum(A - Y))
-        return self.__W, self.__b
