@@ -49,15 +49,15 @@ class Neuron():
         s = np.round(z)
         return s.astype(np.int), self.cost(Y, z)
 
-    """def gradient_descent(self, X, Y, A, alpha=0.05):
-        gradient descent function 
+    def gradient_descent(self, X, Y, A, alpha=0.05):
+        """ gradient descent function """
         m = Y.shape[1]
         p = self.forward_prop(X) - Y
         self.__W = self.__W - (alpha/m) * np.sum((p)*X, axis=1)
         self.__b = self.__b - (alpha/m) * sum(sum(A - Y))
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
-        Training 
+        """ Training """
         nx, m = np.shape(X)
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
@@ -71,23 +71,5 @@ class Neuron():
             p = self.forward_prop(X)-Y
             self.__W = self.__W - (alpha/m) * np.sum((p)*X, axis=1)
             self.__b = self.__b - (alpha/m) * sum(sum(self.__A-Y))
-            self.__A = self.forward_prop(X)
-        return np.round(self.__A).astype(np.int), self.cost(Y, self.__A)
-        for i in range(iterations):
-            self.__W, self.__b = self.gradient_descent(X, Y, self.__A, alpha=0.05)
-            self.__A = self.forward_prop(X)
-        return np.round(self.__A).astype(np.int), self.cost(Y, self.__A)"""
-    def gradient_descent(self, X, Y, A, alpha=0.05):
-        """ gradient descent function """
-        nx, m = np.shape(X)
-        self.__W = self.__W - (alpha/m) * np.matmul(X, (A-Y).T).T
-        self.__b = self.__b - (alpha/m) * np.sum(A-Y).T
-        return self.__W, self.__b
-    
-    def train(self, X, Y, iterations=5000, alpha=0.05):
-        """ Training """
-        nx, m = np.shape(X)
-        for i in range(iterations):
-            self.__W, self.__b = self.gradient_descent(X, Y, self.__A, alpha=0.05)
             self.__A = self.forward_prop(X)
         return np.round(self.__A).astype(np.int), self.cost(Y, self.__A)
