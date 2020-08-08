@@ -72,4 +72,4 @@ class Neuron():
             self.__A = self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A, alpha=0.05)
         self.__A = self.forward_prop(X)
-        return self.__A.astype(np.int) < 0.5, self.cost(Y, self.__A)
+        return (self.__A > 0.5).astype(np.int), self.cost(Y, self.__A)
