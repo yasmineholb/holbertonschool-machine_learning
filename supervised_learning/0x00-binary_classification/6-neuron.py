@@ -68,9 +68,8 @@ class Neuron():
             raise TypeError("alpha must be a float")
         if alpha < 0:
             raise ValueError("alpha must be positive")
+        nx, m = np.shape(X)
         for i in range(iterations):
-            p = self.forward_prop(X)-Y
-            self.__W = self.__W - (alpha/m) * np.sum((p)*X, axis=1)
-            self.__b = self.__b - (alpha/m) * sum(sum(self.__A-Y))
             self.__A = self.forward_prop(X)
+            self.gradient_descent(X, Y, self.__A, alpha=0.05)
         return np.round(self.__A).astype(np.int), self.cost(Y, self.__A)
