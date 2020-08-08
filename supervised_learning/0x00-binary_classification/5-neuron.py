@@ -48,10 +48,17 @@ class Neuron():
         z = self.forward_prop(X)
         s = np.round(z)
         return s.astype(np.int), self.cost(Y, z)
+        """def gradient_descent(self, X, Y, A, alpha=0.05):
+        gradient descent function
+        nx, m = np.shape(X)
+        self.__W = self.__W - (alpha/m) * np.matmul(X, (A-Y).T).T
+        self.__b = self.__b - (alpha/m) * np.sum(A-Y).T
+        return self.__W, self.__b"""
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
         """ gradient descent function """
         nx, m = np.shape(X)
-        self.__W = self.__W - (alpha/m) * np.matmul(X, (A-Y).T).T
-        self.__b = self.__b - (alpha/m) * np.sum(A-Y).T
-        return self.__W, self.__b
+        db = np.sum(A-Y)
+        dW = np.sum((A-Y)*X, axis=1)
+        self.__W = self.__W - (alpha/m) * dW
+        self.__b = self.__b - (alpha/m) * db
