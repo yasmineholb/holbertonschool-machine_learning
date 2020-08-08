@@ -76,11 +76,8 @@ class NeuralNetwork():
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """ gradient descent function """
         nx, m = np.shape(X)
-        dW1 = np.sum((A1-Y)*X, axis=1)
-        dW1 = np.sum((A2-Y)*X, axis=1)
-        db1 = np.sum(A1-Y)
-        db2 = np.sum(A2-Y)
-        self.__W1 = self.__W1 - (alpha/m) * dW1
-        self.__b1 = self.__b1 - (alpha/m) * db1
-        self.__W2 = self.__W2 - (alpha/m) * dW2
-        self.__b2 = self.__b2 - (alpha/m) * db2
+        B = np.dot(self.__W2.T, A2 - Y) * A1 * (1 - A1)
+        self.__W2 -= (alpha/m) * np.dot(A2-Y, A1.T)
+        self.__b2 -= alpha * np.asarray([[np.mean(A2-Y)]])
+        self.__W1 -= (alpha/m) * np.dot(B, X.T)
+        self.__b1 -= alpha * np.asarray([[np.mean(B)]])
