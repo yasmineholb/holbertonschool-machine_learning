@@ -72,12 +72,20 @@ class NeuralNetwork():
         z, p = self.forward_prop(X)
         t = np.round(p)
         return t.astype(np.int), self.cost(Y, p)
-
-    def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
-        """ gradient descent function """
+        """def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
+        radient descent function
         nx, m = np.shape(X)
         B = np.dot(self.__W2.T, A2 - Y) * A1 * (1 - A1)
         self.__W2 -= (alpha/m) * np.dot(A2-Y, A1.T)
         self.__b2 -= alpha * np.asarray([[np.mean(A2-Y)]])
         self.__W1 -= (alpha/m) * np.dot(B, X.T)
+        self.__b1 -= alpha * np.asarray([[np.mean(B)]])"""
+
+    def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
+        """ gradient descent function """
+        nx, m = np.shape(X)
+        B = np.dot(self.__W2.T, A2 - Y) * A1 * (1 - A1)
+        self.__W2 -= (alpha/m) * np.matmul(A2-Y, np.transpose(A1))
+        self.__b2 -= alpha * np.asarray([[np.mean(A2-Y)]])
+        self.__W1 -= (alpha/m) * np.matmul(B, np.transpose(X))
         self.__b1 -= alpha * np.asarray([[np.mean(B)]])
