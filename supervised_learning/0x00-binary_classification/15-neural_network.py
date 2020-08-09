@@ -113,7 +113,7 @@ class NeuralNetwork():
                     S.append(s)
                     Iter.append(i)
         if graph is True:
-            plt.plot(I, S, 'b')
+            plt.plot(Iter, S, 'b')
             plt.title('Training Cost')
             plt.xlabel('iteration')
             plt.ylabel('Cost')
