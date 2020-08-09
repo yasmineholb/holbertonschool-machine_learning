@@ -94,6 +94,6 @@ class NeuralNetwork():
             raise ValueError("alpha must be positive")
         nx, m = np.shape(X)
         for i in range(iterations):
-            self.__A1, self.__A2 = self.forward_prop(X)
+            self.forward_prop(X)
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha=0.05)
         return self.evaluate(X, Y)
