@@ -62,5 +62,5 @@ class DeepNeuralNetwork():
     def evaluate(self, X, Y):
         """ evaluate function """
         z, p = self.forward_prop(X)
-        t = np.round(p)
-        return t.astype(np.int), self.cost(Y, p)
+        t = np.round(z)
+        return t.astype(np.int), self.cost(Y, z)
