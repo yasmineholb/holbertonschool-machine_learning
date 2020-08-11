@@ -11,6 +11,9 @@ def one_hot_encode(Y, classes):
         return None
     if classes < 0:
         return None
-    b = np.zeros((Y.size, classes+1))
-    b[np.arange(Y.size), Y] = 1
-    return b
+    try:
+        b = np.zeros((Y.size, classes+1))
+        b[np.arange(Y.size), Y] = 1
+        return b
+    except Exception:
+        return None
