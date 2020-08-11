@@ -11,7 +11,7 @@ def one_hot_encode(Y, classes):
         """b = np.zeros((Y.size, classes))
         b[np.arange(Y.size), Y] = 1
         return b"""
-        b = np.zeros((classes, Y.shape[0]))
+        b = np.zeros((classes, Y.size))
         for i, j in enumerate(Y):
             b[j][i] = 1
         return b
