@@ -9,8 +9,5 @@ def one_hot_decode(one_hot):
         return None
     if type(one_hot) is not np.ndarray:
         return None
-    try:
-        s = np.argmax(one_hot, axis=0)
-        return s
-    except Exception:
-        return None
+    s = np.argmax(one_hot, axis=0)
+    return s
