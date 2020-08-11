@@ -69,9 +69,6 @@ class DeepNeuralNetwork():
         """ gradient descent function """
         m = np.shape(Y)[1]
         n = self.__L
-        B = np.matmul(self.__weights["W" + str(n)].T, self.__cache[
-            "A" + str(n)] - Y) * self.__cache[
-            "A" + str(n - 1)] * (1 - self.__cache["A" + str(self.__L - 1)])
         self.__weights["W" + str(n)] -= (alpha/m) * np.dot((self.__cache[
             "A" + str(n)] - Y), self.__cache[
             "A" + str(n-1)].T)
