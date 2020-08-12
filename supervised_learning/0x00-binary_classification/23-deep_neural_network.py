@@ -83,3 +83,35 @@ class DeepNeuralNetwork():
                 "A" + str(i - 1)], B.T).T
             self.__weights["b" + str(i)] -= alpha/m * np.sum(
                 B, axis=1, keepdims=True)
+
+    def train(self, X, Y, iterations=5000, alpha=0.05,
+              verbose=True, graph=True, step=100):
+        """ Training """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations < 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha < 0:
+            raise ValueError("alpha must be positive")
+        nx, m = np.shape(X)
+        nx, m = np.shape(X)
+        S = []
+        Iter = []
+        for i in range(iterations+1):
+            self.forward_prop(X)
+            self.gradient_descent(Y, self.__cache, alpha=0.05)
+            s = self.cost(Y, self.__cache["A" + str(self.__L)])
+            if verbose is True:
+                if (i % step == 0) or (i == iterations):
+                    print("Cost after {} iterations: {}".format(i, s))
+                    S.append(s)
+                    Iter.append(i)
+        if graph is True:
+            plt.plot(Iter, S, 'b')
+            plt.title('Training Cost')
+            plt.xlabel('iteration')
+            plt.ylabel('Cost')
+            plt.show()
+        return self.evaluate(X, Y)

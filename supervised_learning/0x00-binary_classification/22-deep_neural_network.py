@@ -66,22 +66,23 @@ class DeepNeuralNetwork():
         return t.astype(np.int), self.cost(Y, z)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
-        """ gradient descent function """
+        """ gradient descent function  """
         m = np.shape(Y)[1]
         n = self.__L
-        self.__weights["W" + str(n)] -= (alpha/m) * np.dot((self.__cache[
-            "A" + str(n)] - Y), self.__cache[
-            "A" + str(n-1)].T)
-        self.__weights[
-            "b" + str(n)] -= alpha * np.asarray([[np.mean(self.__cache[
-                "A" + str(n)] - Y)]])
-        for i in range(n - 1, 0, -1):
-            B = np.matmul(self.__weights["W" + str(i)].T, self.__cache[
-                "A" + str(i)] - Y) * self.__cache[
-                "A" + str(i - 1)] * (1 - self.__cache["A" + str(i - 1)])
-            self.__weights["W" + str(i)] -= (alpha/m) * np.dot(B, self.__cache[
-                "A" + str(i)].T).T
-            self.__weights["b" + str(i)] -= alpha * np.asarray([[np.mean(B)]])
+        ancien = self.__weights["W" + str(n)]
+        self.__weights["W" + str(n)] -= alpha/m * np.dot(self.__cache[
+            "A" + str(n - 1)], (self.__cache["A" + str(n)] - Y).T).T
+        self.__weights["b" + str(n)] -= alpha/m * np.sum(self.__cache[
+            "A" + str(n)] - Y, axis=1)
+        B = self.__cache["A" + str(n)] - Y
+        for i in range(self.__L - 1, 0, -1):
+            B = np.dot(ancien.T, B) * self.__cache[
+                "A" + str(i)] * (1 - self.__cache["A" + str(i)])
+            ancien = self.__weights["W" + str(i)].copy()
+            self.__weights["W" + str(i)] -= alpha/m * np.dot(self.__cache[
+                "A" + str(i - 1)], B.T).T
+            self.__weights["b" + str(i)] -= alpha/m * np.sum(
+                B, axis=1, keepdims=True)
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
         """ Training """
@@ -93,7 +94,6 @@ class DeepNeuralNetwork():
             raise TypeError("alpha must be a float")
         if alpha < 0:
             raise ValueError("alpha must be positive")
-        nx, m = np.shape(X)
         for i in range(iterations):
             self.forward_prop(X)
             self.gradient_descent(Y, self.__cache, alpha=0.05)
