@@ -123,7 +123,7 @@ class DeepNeuralNetwork():
         if not(filename.endswith(".pkl")):
             filename = filename + ".pkl"
         with open(filename, 'wb') as f:
-            pickle.dump(self, f)
+            pickle.dump(self, f, protocol=pickle.HIGHEST_PROTOCOL)
 
     @staticmethod
     def load(filename):
