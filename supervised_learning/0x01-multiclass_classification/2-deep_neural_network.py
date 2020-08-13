@@ -124,9 +124,12 @@ class DeepNeuralNetwork():
             filename = filename + ".pkl"
         """with open(filename, 'wb') as f:
             pickle.dump(self, f, protocol=pickle.HIGHEST_PROTOCOL)"""
-        f = open(filename, 'wb')
-        pickle.dump(self, f)
-        f.close
+        try:
+            f = open(filename, 'wb')
+            pickle.dump(self, f)
+            f.close
+        except Exception:
+            return None
 
     @staticmethod
     def load(filename):
