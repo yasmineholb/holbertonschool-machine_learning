@@ -122,8 +122,11 @@ class DeepNeuralNetwork():
         """ save file function """
         if not(filename.endswith(".pkl")):
             filename = filename + ".pkl"
-        with open(filename, 'wb') as f:
-            pickle.dump(self, f, protocol=pickle.HIGHEST_PROTOCOL)
+        """with open(filename, 'wb') as f:
+            pickle.dump(self, f, protocol=pickle.HIGHEST_PROTOCOL)"""
+        f = open(filename, 'wb')
+        pickle.dump(self, f)
+        f.close
 
     @staticmethod
     def load(filename):
