@@ -125,10 +125,8 @@ class DeepNeuralNetwork():
         """with open(filename, 'wb') as f:
             pickle.dump(self, f, protocol=pickle.HIGHEST_PROTOCOL)"""
         try:
-            p = {}
-            p.add(self)
             f = open(filename, 'wb')
-            pickle.dump(p, f)
+            pickle.dump(self, f)
             f.close
         except Exception:
             return None
