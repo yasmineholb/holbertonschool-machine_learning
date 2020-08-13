@@ -134,5 +134,3 @@ class DeepNeuralNetwork():
             return c
         except FileNotFoundError:
             return None
-        
-        
