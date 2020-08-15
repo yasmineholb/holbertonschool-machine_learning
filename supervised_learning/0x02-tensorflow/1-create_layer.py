@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ create function """
 import tensorflow as tf
-import numpy as np
 
 
 def create_layer(prev, n, activation):
