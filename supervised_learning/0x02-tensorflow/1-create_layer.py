@@ -5,9 +5,10 @@ import tensorflow as tf
 
 def create_layer(prev, n, activation):
     """ create layer function """
+    kernel = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
     linear_model = tf.layers.dense(prev, units=n, activation=activation,
+                                   use_bias=True,
+                                   bias_initializer=tf.zeros_initializer(),
+                                   kernel_initializer=kernel,
                                    name="layer")
-    init = tf.contrib.layers.variance_scaling_initializer(prev, mode="FAN_AVG")
-    """sess = tf.Session()
-    sess.run(init) """
     return(linear_model)
