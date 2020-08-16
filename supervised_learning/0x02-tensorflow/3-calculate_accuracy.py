@@ -9,5 +9,5 @@ def calculate_accuracy(y, y_pred):
     """cost =tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
     logits = y_pred, labels = y))"""
     acc = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
-        logits=y_pred, labels=y))
+        logits=y_pred, labels=y, name=None))
     return str(acc)
