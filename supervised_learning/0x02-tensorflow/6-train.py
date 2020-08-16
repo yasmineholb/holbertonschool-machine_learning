@@ -32,8 +32,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 y: Y_train
             })
             sess.run(train_op, feed_dict={
-                X: X_valid,
-                y: Y_valid
+                X: X_train,
+                y: Y_train
             })
             loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
                 X: X_valid,
