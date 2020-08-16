@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ create function """
 import tensorflow as tf
+import numpy as np
 
 
 def calculate_accuracy(y, y_pred):
@@ -13,8 +14,8 @@ def calculate_accuracy(y, y_pred):
     ac = tf.equal(y, y_pred)
     accuracy = tf.reduce_mean(tf.cast(ac, tf.float32))
     return accuracy"""
-    diff = tf.math.abs(y - y_pred)
-    decimal = tf.constant(0.1)
-    correct = tf.math.less(diff, decimal)
-    accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
+    correct = tf.argmax(y_pred, 1)
+    correct1 = tf.argmax(y, 1)
+    ac = tf.equal(correct1, correct)
+    accuracy = tf.reduce_mean(tf.cast(ac, tf.float32))
     return accuracy
