@@ -8,6 +8,6 @@ def calculate_accuracy(y, y_pred):
     """acc = tf.metrics.accuracy(y, predictions=y_pred)"""
     """cost =tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
     logits = y_pred, labels = y))"""
-    ac = tf.equal(y_pred, y)
+    ac = tf.equal(tf.round(y_pred), y)
     acc = tf.reduce_mean(tf.cast(ac, tf.float32))
-    return str(acc)
+    return acc
