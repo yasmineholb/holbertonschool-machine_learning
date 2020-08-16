@@ -12,8 +12,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     create_train_op = __import__('5-create_train_op').create_train_op
     forward_prop = __import__('2-forward_prop').forward_prop
     """ train function """
-    classes = np.shape(Y_train)[1]
-    nx = np.shape(X_train)[1]
+    classes = Y_train.shape[1]
+    nx = X_train.shape[1]
     X, y = create_placeholders(nx, classes)
     y_pred = forward_prop(X, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
