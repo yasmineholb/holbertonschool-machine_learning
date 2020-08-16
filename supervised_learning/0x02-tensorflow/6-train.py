@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """ train function """
 import tensorflow as tf
+calculate_accuracy = __import__('3-calculate_accuracy').calculate_accuracy
+calculate_loss = __import__('4-calculate_loss').calculate_loss
+create_placeholders = __import__(
+    '0-create_placeholders').create_placeholders
+create_train_op = __import__('5-create_train_op').create_train_op
+forward_prop = __import__('2-forward_prop').forward_prop
 
 
 def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
           alpha, iterations, save_path="/tmp/model.ckpt"):
     """ train function """
-    calculate_accuracy = __import__('3-calculate_accuracy').calculate_accuracy
-    calculate_loss = __import__('4-calculate_loss').calculate_loss
-    create_placeholders = __import__(
-        '0-create_placeholders').create_placeholders
-    create_train_op = __import__('5-create_train_op').create_train_op
-    forward_prop = __import__('2-forward_prop').forward_prop
     """ train function """
     classes = Y_train.shape[1]
     nx = X_train.shape[1]
@@ -27,12 +27,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
         init.run()
         init1.run()
         for i in range(iterations+1):
-            loss_train = sess.run(loss, feed_dict={
-                X: X_train,
-                y: Y_train
-            })
-
-            accuracy_train = sess.run(loss, feed_dict={
+            loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
                 X: X_train,
                 y: Y_train
             })
@@ -40,11 +35,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 X: X_valid,
                 y: Y_valid
             })
-            loss_valid = sess.run(loss, feed_dict={
-                X: X_valid,
-                y: Y_valid
-            })
-            accuracy_valid = sess.run(loss, feed_dict={
+            loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
                 X: X_valid,
                 y: Y_valid
             })
