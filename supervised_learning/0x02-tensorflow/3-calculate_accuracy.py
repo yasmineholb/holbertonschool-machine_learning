@@ -10,6 +10,6 @@ def calculate_accuracy(y, y_pred):
     logits = y_pred, labels = y))
     acc = tf.reduce_mean(tf.cast(ac, tf.float32))
     return acc"""
-    ac = tf.equal(y, y_pred)
+    ac = tf.equal(tf.round(y), y_pred)
     accuracy = tf.reduce_mean(tf.cast(ac, tf.float32))
     return accuracy
