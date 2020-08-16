@@ -54,4 +54,5 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {cost}".format(loss_valid))
                 print("\tValidation Accuracy: {accuracy}".format(
                     accuracy_valid))
+    saver = tf.train.Saver()
     return saver.save(sess, save_path)
