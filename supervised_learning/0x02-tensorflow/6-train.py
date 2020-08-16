@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """ train function """
 import tensorflow as tf
-import numpy as np
 
 
 def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
