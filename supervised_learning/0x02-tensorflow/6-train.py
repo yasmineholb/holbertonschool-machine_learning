@@ -21,8 +21,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     train_op = create_train_op(loss, alpha)
     init = tf.global_variables_initializer()
     init1 = tf.local_variables_initializer()
+    saver = tf.train.Saver()
     with tf.Session() as sess:
-        saver = tf.train.Saver()
         init.run()
         init1.run()
         for i in range(iterations+1):
@@ -39,6 +39,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 y: Y_train
             })
             if i % 100 == 0:
+                saver.save(sess, save_path)
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
