@@ -24,6 +24,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     tf.add_to_collection('X', X)
     tf.add_to_collection('y', y)
     tf.add_to_collection('y_pred', y_pred)
+    saver = tf.train.Saver()
     init = tf.global_variables_initializer()
     init1 = tf.local_variables_initializer()
     with tf.Session() as sess:
@@ -49,6 +50,5 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-        saver = tf.train.Saver()
         saved = saver.save(sess, save_path)
     return saved
