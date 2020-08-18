@@ -50,5 +50,5 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-        saved = train.save(saver, sess, save_path)
-    return saved
+        meta_graph_def = tf.train.export_meta_graph(filename = save_path+'my_model.meta')
+    return meta_graph_def
