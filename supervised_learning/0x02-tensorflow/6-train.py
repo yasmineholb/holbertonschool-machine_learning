@@ -18,6 +18,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
     train_op = create_train_op(loss, alpha)
+    saver = tf.train.Saver()
     tf.add_to_collection('train_op', train_op)
     tf.add_to_collection('accuracy', accuracy)
     tf.add_to_collection('loss', loss)
@@ -49,5 +50,4 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-    saver = tf.train.Saver()
     return saver.save(sess, save_path)
