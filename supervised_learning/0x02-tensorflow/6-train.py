@@ -30,7 +30,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     with tf.Session() as sess:
         init.run()
         init1.run()
-        saver.save(sess, save_path)
+        """saver.save(sess, save_path)"""
         for i in range(iterations+1):
             loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
                 X: X_train,
