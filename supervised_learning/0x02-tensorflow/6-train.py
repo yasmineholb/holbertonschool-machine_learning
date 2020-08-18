@@ -18,7 +18,6 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
     train_op = create_train_op(loss, alpha)
-    saver = tf.train.Saver()
     tf.add_to_collection('train_op', train_op)
     tf.add_to_collection('accuracy', accuracy)
     tf.add_to_collection('loss', loss)
@@ -27,27 +26,29 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     tf.add_to_collection('y_pred', y_pred)
     init = tf.global_variables_initializer()
     init1 = tf.local_variables_initializer()
-    with tf.Session() as sess:
-        init.run()
-        init1.run()
-        for i in range(iterations+1):
-            loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
-                X: X_train,
-                y: Y_train
-            })
-            loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
-                X: X_valid,
-                y: Y_valid
-            })
-            sess.run(train_op, feed_dict={
-                X: X_train,
-                y: Y_train
-            })
-            if(i == 0) or (i % 100 == 0) or (i == iterations):
-                print("After {} iterations:".format(i))
-                print("\tTraining Cost: {}".format(loss_train))
-                print("\tTraining Accuracy: {}".format(accuracy_train))
-                print("\tValidation Cost: {}".format(loss_valid))
-                print("\tValidation Accuracy: {}".format(
-                    accuracy_valid))
-    return saver.save(sess, save_path)
+    saver = tf.train.Saver()
+    sess = tf.Session()
+    init.run()
+    init1.run()
+    for i in range(iterations+1):
+        loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
+            X: X_train,
+            y: Y_train
+        })
+        loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
+            X: X_valid,
+            y: Y_valid
+        })
+        sess.run(train_op, feed_dict={
+            X: X_train,
+            y: Y_train
+        })
+        if(i == 0) or (i % 100 == 0) or (i == iterations):
+            print("After {} iterations:".format(i))
+            print("\tTraining Cost: {}".format(loss_train))
+            print("\tTraining Accuracy: {}".format(accuracy_train))
+            print("\tValidation Cost: {}".format(loss_valid))
+            print("\tValidation Accuracy: {}".format(
+                accuracy_valid))
+    saver.save(sess, save_path)
+    return save_path
