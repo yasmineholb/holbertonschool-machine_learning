@@ -44,6 +44,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 X: X_train,
                 y: Y_train
             })
+            saver.save(sess, save_path)
             if(i == 0) or (i % 100 == 0) or (i == iterations):
                 saver.save(sess, save_path, global_step=100)
                 print("After {} iterations:".format(i))
