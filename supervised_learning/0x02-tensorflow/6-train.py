@@ -46,7 +46,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
             })
             sav = saver.save(sess, save_path)
             if(i == 0) or (i % 100 == 0) or (i == iterations):
-                sav = saver.save(sess, save_path, global_step=i)
+                sav.save(sess, save_path, global_step=i)
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
