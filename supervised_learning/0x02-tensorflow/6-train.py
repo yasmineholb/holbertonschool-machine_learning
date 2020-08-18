@@ -19,11 +19,15 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
     train_op = create_train_op(loss, alpha)
+    tf.add_to_collection('train_op', train_op)
+    tf.add_to_collection('accuracy', accuracy)
+    tf.add_to_collection('loss', loss)
+    tf.add_to_collection('X', X)
+    tf.add_to_collection('y', y)
+    tf.add_to_collection('y_pred', y_pred)
     init = tf.global_variables_initializer()
     init1 = tf.local_variables_initializer()
     saver = tf.train.Saver()
-    if iterations % 100 != 0:
-        raise ValueError
     with tf.Session() as sess:
         init.run()
         init1.run()
@@ -40,7 +44,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 X: X_train,
                 y: Y_train
             })
-            if i % 100 == 0:
+            if(i == 0) or (i % 100 == 0) or (i == iterations):
                 saver.save(sess, save_path)
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
@@ -48,5 +52,4 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-    saver = tf.train.Saver()
     return saver.save(sess, save_path)
