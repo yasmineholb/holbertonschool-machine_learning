@@ -50,5 +50,5 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-        save_path = saver.save(sess, save_path)
-    return save_path
+        saved = train.save(saver, sess, save_path)
+    return saved
