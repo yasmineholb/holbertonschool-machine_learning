@@ -6,6 +6,7 @@ import tensorflow as tf
 def evaluate(X, Y, save_path):
     """ evaluate function """
     with tf.Session() as sess:
+        saver = tf.train.import_meta_graph(save_path+'.meta')
         saver.restore(sess, save_path)
         sess.run(tf.global_variables_initializer())
         sess.run(tf.local_variables_initializer())
