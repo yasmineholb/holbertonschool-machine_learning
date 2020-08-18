@@ -30,7 +30,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     with tf.Session() as sess:
         init.run()
         init1.run()
-        """saver.save(sess, save_path)"""
+        saver.save(sess, save_path)
         for i in range(iterations+1):
             loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
                 X: X_train,
@@ -44,13 +44,12 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 X: X_train,
                 y: Y_train
             })
-            sav = saver.save(sess, save_path)
             if(i == 0) or (i % 100 == 0) or (i == iterations):
-                sav = sav.save(sess, save_path, global_step=i)
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-    return sav
+        save_path = saver.save(sess, save_path)
+    return save_path
