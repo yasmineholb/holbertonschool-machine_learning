@@ -22,6 +22,6 @@ def evaluate(X, Y, save_path):
         accuracy = accuracy_saved[0]
         train_op = train_op_saved[0]
         y_pred = y_pred_saved[0]
-        y_pred, accuracy, loss = session.run((y_pred, accuracy, loss),
-                                             feed_dict={X: X, y: Y})
+        y_pred, accuracy, loss = sess.run((y_pred, accuracy, loss),
+                                          feed_dict={X: X, y: Y})
     return(y_pred, accuracy, loss)
