@@ -11,6 +11,7 @@ forward_prop = __import__('2-forward_prop').forward_prop
 def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
           alpha, iterations, save_path="/tmp/model.ckpt"):
     """ train function """
+    """ train function """
     classes = Y_train.shape[1]
     nx = X_train.shape[1]
     X, y = create_placeholders(nx, classes)
@@ -21,31 +22,34 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     tf.add_to_collection('train_op', train_op)
     tf.add_to_collection('accuracy', accuracy)
     tf.add_to_collection('loss', loss)
-    tf.add_to_collection('x', x)
+    tf.add_to_collection('x', X)
     tf.add_to_collection('y', y)
     tf.add_to_collection('y_pred', y_pred)
+    init = tf.global_variables_initializer()
+    init1 = tf.local_variables_initializer()
     saver = tf.train.Saver()
-    sess = tf.Session()
-    sess.run(tf.global_variables_initializer())
-    for i in range(iterations+1):
-        loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
-            X: X_train,
-            y: Y_train
-        })
-        loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
-            X: X_valid,
-            y: Y_valid
-        })
-        sess.run(train_op, feed_dict={
-            X: X_train,
-            y: Y_train
-        })
-        if(i == 0) or (i % 100 == 0) or (i == iterations):
-            print("After {} iterations:".format(i))
-            print("\tTraining Cost: {}".format(loss_train))
-            print("\tTraining Accuracy: {}".format(accuracy_train))
-            print("\tValidation Cost: {}".format(loss_valid))
-            print("\tValidation Accuracy: {}".format(
-                accuracy_valid))
-        sav = saver.save(sess, save_path)
-    return sav
+    with tf.Session() as sess:
+        init.run()
+        init1.run()
+        for i in range(iterations+1):
+            loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
+                X: X_train,
+                y: Y_train
+            })
+            loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
+                X: X_valid,
+                y: Y_valid
+            })
+            sess.run(train_op, feed_dict={
+                X: X_train,
+                y: Y_train
+            })
+            if(i == 0) or (i % 100 == 0) or (i == iterations):
+                saver.save(sess, save_path)
+                print("After {} iterations:".format(i))
+                print("\tTraining Cost: {}".format(loss_train))
+                print("\tTraining Accuracy: {}".format(accuracy_train))
+                print("\tValidation Cost: {}".format(loss_valid))
+                print("\tValidation Accuracy: {}".format(
+                    accuracy_valid))
+    return saver.save(sess, save_path)
