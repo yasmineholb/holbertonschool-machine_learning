@@ -33,15 +33,15 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
         saver.save(sess, save_path)
         for i in range(iterations+1):
             loss_train, accuracy_train = sess.run((loss, accuracy), feed_dict={
-                X: X_train,
+                x: X_train,
                 y: Y_train
             })
             loss_valid, accuracy_valid = sess.run((loss, accuracy), feed_dict={
-                X: X_valid,
+                x: X_valid,
                 y: Y_valid
             })
             sess.run(train_op, feed_dict={
-                X: X_train,
+                x: X_train,
                 y: Y_train
             })
             if (i % 100 == 0) or (i == iterations):
