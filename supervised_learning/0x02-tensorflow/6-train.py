@@ -13,7 +13,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     """ train function """
     classes = Y_train.shape[1]
     nx = X_train.shape[1]
-    X, y = create_placeholders(nx, classes)
+    x, y = create_placeholders(nx, classes)
     y_pred = forward_prop(X, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
