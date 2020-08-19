@@ -14,14 +14,14 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     classes = Y_train.shape[1]
     nx = X_train.shape[1]
     x, y = create_placeholders(nx, classes)
-    y_pred = forward_prop(X, layer_sizes, activations)
+    y_pred = forward_prop(x, layer_sizes, activations)
     loss = calculate_loss(y, y_pred)
     accuracy = calculate_accuracy(y, y_pred)
     train_op = create_train_op(loss, alpha)
     tf.add_to_collection('train_op', train_op)
     tf.add_to_collection('accuracy', accuracy)
     tf.add_to_collection('loss', loss)
-    tf.add_to_collection('x', x)
+    tf.add_to_collection('X', X)
     tf.add_to_collection('y', y)
     tf.add_to_collection('y_pred', y_pred)
     init = tf.global_variables_initializer()
@@ -44,13 +44,12 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 x: X_train,
                 y: Y_train
             })
-            if (i % 100 == 0) or (i == iterations):
+            if(i == 0) or (i % 100 == 0) or (i == iterations):
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-            if i == iterations:
-                save_path = saver.save(sess, save_path)
+        save_path = saver.save(sess, save_path)
     return save_path
