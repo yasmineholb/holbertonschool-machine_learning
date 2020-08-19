@@ -45,11 +45,10 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 y: Y_train
             })
             if(i == 0) or (i % 100 == 0) or (i == iterations):
-                saver.save(sess, save_path)
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_train))
                 print("\tTraining Accuracy: {}".format(accuracy_train))
                 print("\tValidation Cost: {}".format(loss_valid))
                 print("\tValidation Accuracy: {}".format(
                     accuracy_valid))
-    return saver.save(sess, save_path)
+            return saver.save(sess, save_path)
