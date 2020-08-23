@@ -8,6 +8,7 @@ import numpy as np
 
 
 def moving_average(data, beta):
+    """ Moiving Average """
     V = [0]
     W = []
     for i in range(len(data)):
