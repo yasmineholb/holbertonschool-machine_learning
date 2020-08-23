@@ -7,10 +7,10 @@ import tensorflow as tf
 def create_batch_norm_layer(prev, n, activation):
     """ create batch """
     kernel = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-    ds = tf.layers.dense(prev, units=n, activation=activation,
-                         kernel_initializer=kernel,
-                         name="layer", reuse=tf.AUTO_REUSE)
-    """ds = linear_model(prev)"""
+    ds = tf.layers.dense(prev, units=n, activation=None,
+                         kernel_initializer=kernel, name="layer",
+                         reuse=tf.AUTO_REUSE)
+    """ds = d(prev)"""
     i, j = tf.nn.moments(ds, axes=[0])
     gamma = tf.Variable(tf.constant(1.0, shape=[n]),
                         name="gamma", trainable=True)
