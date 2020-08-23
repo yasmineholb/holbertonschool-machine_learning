@@ -6,8 +6,8 @@ import numpy as np
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 
-def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32, 
-                     epochs=5, load_path="/tmp/model.ckpt", 
+def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
+                     epochs=5, load_path="/tmp/model.ckpt",
                      save_path="/tmp/model.ckpt"):
     """ evaluate function """
     with tf.Session() as sess:
@@ -23,12 +23,12 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         sess.run(tf.local_variables_initializer())
         for i in range(epochs+1):
             X_train, Y_train = shuffle_data(X_train, Y_train)
-            loss_train, accuracy_train = sess.run((loss, accuracy), 
+            loss_train, accuracy_train = sess.run((loss, accuracy),
                                                   feed_dict={
                 x: X_train,
                 y: Y_train
             })
-            loss_valid, accuracy_valid = sess.run((loss, accuracy), 
+            loss_valid, accuracy_valid = sess.run((loss, accuracy),
                                                   feed_dict={
                 x: X_valid,
                 y: Y_valid
@@ -38,14 +38,17 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
             print("\tTraining Accuracy: {}".format(accuracy_train))
             print("\tValidation Cost: {}".format(loss_valid))
             print("\tValidation Accuracy: {}".format(
-                accuracy_valid)) 
+                accuracy_valid))
             if i < epochs:
                 for j in range(batch_nb + 1):
                     sess.run(train_op, feed_dict={
                         x: X_train[j*batch_size:(j+1)*batch_size],
                         y: Y_train[j*batch_size:(j+1)*batch_size]})
                     if(j > 0) and (j % 100 == 0) and (j < batch_nb):
-                        accuracy_batch, loss_batch = sess.run((accuracy, loss), feed_dict={x: X_train[j*batch_size:(j+1)*batch_size], y: Y_train[j*batch_size:(j+1)*batch_size]})
+                        accuracy_batch, loss_batch = sess.run((accuracy, loss),
+                                                              feed_dict={
+                                x: X_train[j*batch_size:(j+1)*batch_size],
+                                y: Y_train[j*batch_size:(j+1)*batch_size]})
                         print("\tStep: {}".format(j))
                         print("\t\tCost: {}".format(loss_batch))
                         print("\t\tAccuracy:  {}".format(accuracy_batch))
