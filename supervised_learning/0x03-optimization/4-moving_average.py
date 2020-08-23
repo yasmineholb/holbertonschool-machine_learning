@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" Moving Average"""
-import numpy as np
+""" Moiving Average """
 
 """Ressources à regarder:
     https://www.youtube.com/watch?v=lAq96T8FkTw
@@ -8,9 +7,10 @@ import numpy as np
 
 
 def moving_average(data, beta):
-    """ Moving Average"""
+    """ Moiving Average """
     V = [0]
+    W = []
     for i in range(len(data)):
         V.append((1 - beta) * data[i] + beta * V[i])
-    V = np.asarray(V[1:])/np.asarray([1-beta**(i+1) for i in range(len(data))])
-    return V
+        W.append(V[i+1] / (1 - beta ** (i+1)))
+    return W
