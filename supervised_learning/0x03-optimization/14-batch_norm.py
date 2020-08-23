@@ -6,9 +6,7 @@ import tensorflow as tf
 
 def create_batch_norm_layer(prev, n, activation):
     """ create batch """
-    scope = tf.variable_scope(None, default_name='layer').__enter__()
-    kernel = tf.contrib.layers.variance_scaling_initializer(factor=2.0,
-                                                            mode="FAN_AVG")
+    kernel = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
     ds = tf.layers.dense(prev, units=n, activation=activation,
                          kernel_initializer=kernel,
                          name="layer", reuse=tf.AUTO_REUSE)
@@ -18,8 +16,7 @@ def create_batch_norm_layer(prev, n, activation):
                         name="gamma", trainable=True)
     beta = tf.Variable(tf.constant(0.0, shape=[n]),
                        name="beta", trainable=True)
-    scope.reuse_variables()
     batch = tf.nn.batch_normalization(ds, mean=i, variance=j,
                                       offset=beta, scale=gamma,
                                       variance_epsilon=1e-8)
-    return batch
+    return activation(batch)
