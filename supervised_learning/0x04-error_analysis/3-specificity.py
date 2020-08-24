@@ -12,5 +12,5 @@ def specificity(confusion):
         A[:, i] = np.zeros(classes)
         A[i, :] = np.zeros(classes)
         S = sum(sum(A * confusion))
-        res[i] = S / (S + sum(confusion[1:, i]))
+        res[i] = S / (S + sum(confusion[:, i]) - confusion[i, i])
     return res
