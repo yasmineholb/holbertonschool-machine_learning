@@ -13,7 +13,7 @@ def dropout_forward_prop(X, weights, L, keep_prob):
         A = "A" + str(i)
         w = "W" + str(i+1)
         b = "b" + str(i+1)
-        d = "d" + str(i+1)
+        d = "D" + str(i+1)
         A1 = "A" + str(i+1)
         s = np.matmul(weights[w], cache[A]) + (weights[b])
         """Act = 1/(1 + (np.exp(-(s))))"""
