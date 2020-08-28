@@ -4,8 +4,8 @@ import numpy as np
 
 
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
-    """ function that updates the weights and biases of a neural
-        network using gradient descent with L2 regularization """
+    """ function that updates the weights of a neural network with
+        Dropout regularization using gradient descent """
     d_z = cache["A" + str(L)] - Y
     m = len(Y[0])
     for i in range(L, 0, -1):
