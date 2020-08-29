@@ -68,22 +68,19 @@ class DeepNeuralNetwork():
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """ gradient descent function  """
-        m = np.shape(Y)[1]
-        n = self.__L
-        ancien = self.__weights["W" + str(n)]
-        self.__weights["W" + str(n)] -= alpha/m * np.dot(self.__cache[
-            "A" + str(n - 1)], (self.__cache["A" + str(n)] - Y).T).T
-        self.__weights["b" + str(n)] -= alpha/m * np.sum(self.__cache[
-            "A" + str(n)] - Y, axis=1)
-        B = self.__cache["A" + str(n)] - Y
-        for i in range(self.__L - 1, 0, -1):
-            B = np.dot(ancien.T, B) * self.__cache[
-                "A" + str(i)] * (1 - self.__cache["A" + str(i)])
-            ancien = self.__weights["W" + str(i)].copy()
-            self.__weights["W" + str(i)] -= alpha/m * np.dot(self.__cache[
-                "A" + str(i - 1)], B.T).T
-            self.__weights["b" + str(i)] -= alpha/m * np.sum(
-                B, axis=1, keepdims=True)
+        copy_w = self.__weights.copy()
+        d_z = cache["A" + str(self.__L)] - Y
+        m = len(Y[0])
+        for i in range(self.__L, 0, -1):
+            Actv = cache["A" + str(i - 1)]
+            d_w = (1 / m) * np.matmul(d_z, Actv.T)
+            d_b = (1 / m) * np.sum(d_z, axis=1, keepdims=True)
+            b = "b" + str(i)
+            w = "W" + str(i)
+            self.__weights[b] = self.__weights[b] - alpha * d_b
+            self.__weights[w] = self.__weights[w] - alpha * d_w
+            da = (1 - Actv) * Actv
+            d_z = np.matmul(copy_w[w].T, d_z) * da
 
     def train(self, X, Y, iterations=5000, alpha=0.05,
               verbose=True, graph=True, step=100):
@@ -102,7 +99,7 @@ class DeepNeuralNetwork():
         Iter = []
         for i in range(iterations+1):
             self.forward_prop(X)
-            self.gradient_descent(Y, self.__cache, alpha=0.05)
+            self.gradient_descent(Y, self.__cache, alpha)
             s = self.cost(Y, self.__cache["A" + str(self.__L)])
             if verbose is True:
                 if (i % step == 0) or (i == iterations):
