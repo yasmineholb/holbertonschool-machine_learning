@@ -118,12 +118,8 @@ class DeepNeuralNetwork():
         """ save file function """
         if not(filename.endswith(".pkl")):
             filename = filename + ".pkl"
-        try:
-            f = open(filename, 'wb')
-            pickle.dump(self, f)
-            f.close
-        except Exception:
-            return None
+        with open(filename, "wb") as fl:
+            pickle.dump(self, fl)
 
     @staticmethod
     def load(filename):
