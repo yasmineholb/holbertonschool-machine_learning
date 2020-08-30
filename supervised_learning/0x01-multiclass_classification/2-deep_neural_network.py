@@ -100,13 +100,14 @@ class DeepNeuralNetwork():
         Iter = []
         for i in range(iterations+1):
             self.forward_prop(X)
-            self.gradient_descent(Y, self.__cache, alpha)
             s = self.cost(Y, self.__cache["A" + str(self.__L)])
             if verbose is True:
                 if (i % step == 0) or (i == iterations):
                     print("Cost after {} iterations: {}".format(i, s))
                     S.append(s)
                     Iter.append(i)
+            if i < iterations:
+                self.gradient_descent(Y, self.__cache, alpha)
         if graph is True:
             plt.plot(Iter, S, 'b')
             plt.title('Training Cost')
