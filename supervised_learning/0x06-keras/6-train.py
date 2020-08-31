@@ -8,7 +8,7 @@ def train_model(network, data, labels, batch_size, epochs,
                 patience=0, verbose=True, shuffle=False):
     """ Function that train the model using early stopping """
     if early_stopping is True:
-        if validation_data is not None:
+        if validation_data is not None and patience < epochs:
             es = K.callbacks.EarlyStopping(monitor='val_loss',
                                            mode='min', patience=patience)
             history = network.fit(x=data, y=labels, epochs=epochs,
