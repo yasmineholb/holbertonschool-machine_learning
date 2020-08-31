@@ -7,8 +7,9 @@ def train_model(network, data, labels, batch_size, epochs,
                 validation_data=None, verbose=True, shuffle=False):
     """ Function that trains a model using mini-batch
         gradient descent """
-    network.fit(x=data, y=labels, epochs=epochs, verbose=verbose,
-                batch_size=batch_size,
-                validation_data=validation_data,
-                shuffle=shuffle)
+    history = network.fit(x=data, y=labels, epochs=epochs, verbose=verbose,
+                          batch_size=batch_size,
+                          validation_data=validation_data,
+                          shuffle=shuffle)
+    return history
     """return history"""
