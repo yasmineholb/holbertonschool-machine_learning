@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """ train model """
-import numpy as np
 
 
 def train_model(network, data, labels, batch_size, epochs,
