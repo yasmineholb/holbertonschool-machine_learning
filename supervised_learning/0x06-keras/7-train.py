@@ -17,26 +17,26 @@ def train_model(network, data, labels, batch_size, epochs,
                 return alpha / (1 + decay_rate * epoch)
             call = K.callbacks.LearningRateScheduler(scheduler)
             tf.append(call)
-            if early_stopping is True:
-                if validation_data is not None and patience < epochs:
-                    es = K.callbacks.EarlyStopping(monitor='val_loss',
-                                                   mode='min',
-                                                   patience=patience)
-                    history = network.fit(x=data, y=labels, epochs=epochs,
-                                          verbose=verbose,
-                                          batch_size=batch_size,
-                                          validation_data=validation_data,
-                                          shuffle=shuffle, callbacks=[es])
-                else:
-                    history = network.fit(x=data, y=labels, epochs=epochs,
-                                          verbose=verbose,
-                                          batch_size=batch_size,
-                                          validation_data=validation_data,
-                                          shuffle=shuffle)
-            else:
-                history = network.fit(x=data, y=labels, epochs=epochs,
-                                      verbose=verbose,
-                                      batch_size=batch_size,
-                                      validation_data=validation_data,
-                                      shuffle=shuffle)
+    if early_stopping is True:
+        if validation_data is not None and patience < epochs:
+            es = K.callbacks.EarlyStopping(monitor='val_loss',
+                                           mode='min',
+                                           patience=patience)
+            history = network.fit(x=data, y=labels, epochs=epochs,
+                                  verbose=verbose,
+                                  batch_size=batch_size,
+                                  validation_data=validation_data,
+                                  shuffle=shuffle, callbacks=[es])
+        else:
+            history = network.fit(x=data, y=labels, epochs=epochs,
+                                  verbose=verbose,
+                                  batch_size=batch_size,
+                                  validation_data=validation_data,
+                                  shuffle=shuffle)
+    else:
+        history = network.fit(x=data, y=labels, epochs=epochs,
+                              verbose=verbose,
+                              batch_size=batch_size,
+                              validation_data=validation_data,
+                              shuffle=shuffle)
     return history
