@@ -9,14 +9,6 @@ def train_model(network, data, labels, batch_size, epochs,
                 decay_rate=1, save_best=False, filepath=None,
                 verbose=True, shuffle=False):
     """ Function that train the model with learning rate decay """
-    if save_best:
-        save_f = K.callbacks.ModelCheckpoint(filepath,
-                                             save_best_only=True)
-        history = network.fit(x=data, y=labels, epochs=epochs,
-                              verbose=verbose,
-                              batch_size=batch_size,
-                              validation_data=validation_data,
-                              shuffle=shuffle, callbacks=[save_f])
     if validation_data:
         if learning_rate_decay is True:
             def scheduler(epoch):
@@ -44,6 +36,14 @@ def train_model(network, data, labels, batch_size, epochs,
                                   batch_size=batch_size,
                                   validation_data=validation_data,
                                   shuffle=shuffle)
+    if save_best:
+        save_f = K.callbacks.ModelCheckpoint(filepath,
+                                             save_best_only=True)
+        history = network.fit(x=data, y=labels, epochs=epochs,
+                              verbose=verbose,
+                              batch_size=batch_size,
+                              validation_data=validation_data,
+                              shuffle=shuffle, callbacks=[save_f])
     else:
         history = network.fit(x=data, y=labels, epochs=epochs,
                               verbose=verbose,
