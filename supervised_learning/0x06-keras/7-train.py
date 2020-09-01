@@ -11,7 +11,7 @@ def train_model(network, data, labels, batch_size, epochs,
     """ Function that train the model with learning rate decay """
     if validation_data:
         tf = []
-        if learning_rate_decay:
+        if learning_rate_decay is True:
             def scheduler(epoch):
                 """ scheduler Function """
                 return alpha / (1 + decay_rate * epoch)
