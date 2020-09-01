@@ -15,7 +15,7 @@ def train_model(network, data, labels, batch_size, epochs,
             def scheduler(epoch):
                 """ scheduler Function """
                 return alpha / (1 + decay_rate * epoch)
-            call = K.callbacks.LearningRateScheduler(scheduler)
+            call = K.callbacks.LearningRateScheduler(scheduler, 1)
             tf.append(call)
     if early_stopping is True:
         if validation_data is not None and patience < epochs:
