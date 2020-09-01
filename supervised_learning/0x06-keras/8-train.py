@@ -11,7 +11,7 @@ def train_model(network, data, labels, batch_size, epochs,
     """ Function that train the model with learning rate decay """
     if save_best:
         save_f = K.callbacks.ModelCheckpoint(filepath,
-                                             save_best_only=save_best)
+                                             save_best_only=True)
         history = network.fit(x=data, y=labels, epochs=epochs,
                               verbose=verbose,
                               batch_size=batch_size,
