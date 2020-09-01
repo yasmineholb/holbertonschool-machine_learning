@@ -9,7 +9,7 @@ def train_model(network, data, labels, batch_size, epochs,
                 alpha=0.1, decay_rate=1, verbose=True,
                 shuffle=False):
     """ Function that train the model with learning rate decay """
-    if validation_data:
+    if validation_data and patience < epochs:
         tf = []
         if learning_rate_decay is True:
             def scheduler(epoch):
