@@ -8,17 +8,14 @@ def convolve_grayscale_same(images, kernel):
         convolution on grayscale images """
     m, h, w = np.shape(images)
     kh, kw = np.shape(kernel)
-    output_h = h - kh + 1
-    output_w = w - kw + 1
-    t = np.arange(m)
-    output = np.zeros((m, output_h, output_w))
-    image_padded = np.zeros((m, (h + (kh-1)), 
-                             (w + (kw-1))))   
-    image_padded[t, (kh//2):-(kh//2), 
-                 (kw//2):-(kw//2)] = images
-    """image_padded[m, pad_top:-pad_bottom, pad_left:-pad_right, :] = conv_input"""
-    for x in range(output_h):
-        for y in range(output_w):
-            output[t, x, y] = (image_padded[t, x:kh+x, y:kw+y] * kernel).sum(
-                axis=(1, 2)) 
-    return output
+    image = np.zeros((m, h + kh - 1, w + kw - 1))
+    ph = (kh-1)//2
+    pw = (kw-1)//2
+    image[:, ph:h+ph, pw:w+pw] = images.copy()
+    S = np.zeros((m, h, w))
+    im = np.arange(0, m)
+    for i in range(h):
+        for j in range(w):
+            S[im, i, j] = np.sum(image[im, i:i + kh, j:j + kw] * kernel,
+                                 axis=(1, 2))
+    return S
