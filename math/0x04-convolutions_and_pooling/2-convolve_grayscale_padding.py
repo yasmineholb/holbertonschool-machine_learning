@@ -8,9 +8,8 @@ def convolve_grayscale_padding(images, kernel, padding):
         images with custom padding """
     m, h, w = np.shape(images)
     kh, kw = np.shape(kernel)
-    ph = (padding[0] - padding[0] % 2) // 2
-    pw = (padding[1] - padding[1] % 2) // 2
-    image = np.zeros((m, h + padding[0], w + padding[1]))
+    ph, pw = padding
+    image = np.zeros((m, h + 2 * padding[0], w + 2 * padding[1]))
     image[:, ph:h+ph, pw:w+pw] = images.copy()
     t1, h1, w1 = np.shape(image)
     S = np.zeros((m, h1 - kh + 1, w1 - kw + 1))
