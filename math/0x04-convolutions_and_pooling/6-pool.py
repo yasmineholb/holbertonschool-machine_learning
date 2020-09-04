@@ -2,6 +2,7 @@
 """ pooling function """
 import numpy as np
 
+
 def pool(images, kernel_shape, stride, mode='max'):
     """ Function that performs pooling on images """
     m, h, w, c = np.shape(images)
@@ -20,5 +21,6 @@ def pool(images, kernel_shape, stride, mode='max'):
             else:
                 output[t, x, y] = np.mean(images[t,
                                                  x*sh:(kh+(x*sh)),
-                                                 y*sw:(kw+(y*sw))], axis=(1, 2))
+                                                 y*sw:(kw+(y*sw))],
+                                          axis=(1, 2))
     return output
