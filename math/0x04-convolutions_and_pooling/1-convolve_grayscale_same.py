@@ -9,8 +9,14 @@ def convolve_grayscale_same(images, kernel):
     m, h, w = np.shape(images)
     kh, kw = np.shape(kernel)
     image = np.zeros((m, h + kh - 1, w + kw - 1))
-    ph = (kh-1)//2
-    pw = (kw-1)//2
+    if kh % 2 == 1:
+        ph = (kh-1)//2
+    else:
+        ph = kh//2
+    if kw % 2 == 1:
+        pw = (kw-1)//2
+    else:
+        pw = kw//2
     image[:, ph:h+ph, pw:w+pw] = images.copy()
     S = np.zeros((m, h, w))
     im = np.arange(0, m)
