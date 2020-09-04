@@ -16,8 +16,8 @@ def convolve_grayscale(images, kernel, padding='same',
     elif padding == "same":
         """ph = (kh-kh % 2)//2
         pw = (kw-kw % 2)//2"""
-        ph = int(((h - 1) * sh + kh - h) / 2) + 1
-        pw = int(((w - 1) * sw + kw - w) / 2) + 1
+        ph = floor(((h - 1) * sh + kh - h) / 2) + 1
+        pw = floor(((w - 1) * sw + kw - w) / 2) + 1
     else:
         ph, pw = padding
     image = np.zeros((m, (h + 2 * ph), (w + 2 * pw)))
