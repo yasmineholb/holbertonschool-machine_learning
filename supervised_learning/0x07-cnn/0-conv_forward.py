@@ -13,8 +13,8 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
         ph = 0
         pw = 0
     elif padding == "same":
-        ph = int(((h - 1) * sh + kh - h) / 2) + 1
-        pw = int(((w - 1) * sw + kw - w) / 2) + 1
+        ph = int(((h - 1) * sh + kh - kh % 2 - h) / 2) + 1
+        pw = int(((w - 1) * sw + kw - kw % 2 - w) / 2) + 1
     else:
         ph, pw = padding
     image = np.zeros((m, (h + 2 * ph), (w + 2 * pw), c))
