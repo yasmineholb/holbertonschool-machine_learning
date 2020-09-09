@@ -4,6 +4,8 @@ import numpy as np
 
 
 def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
+    """ Function that that performs forward propagation
+        over a convolutional layer of a neural network """
     m, h, w, c = np.shape(A_prev)
     kh, kw, c, nc = np.shape(W)
     sh, sw = stride
