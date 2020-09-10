@@ -20,9 +20,9 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
                 for c in range(c_new):   
                     
                     h_start  = h * sh
-                    h_end    = h_start + kh
+                    h_end    = (h * sh) + kh
                     w_start = w * sw
-                    w_end   = h_start + kw
+                    w_end   = (w * sw) + kw
                     
                     if mode == "max":
                         a_prev_slice = a_prev[h_start:h_end, w_start:w_end, c]
