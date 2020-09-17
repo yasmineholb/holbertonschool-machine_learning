@@ -23,7 +23,6 @@ def identity_block(A_prev, filters):
                              padding='same',
                              kernel_initializer=he_init)(Act2)
     norm_3 = K.layers.BatchNormalization(axis=3)(conv_3)
-    Act3 = K.layers.Activation('relu')(norm_3)
-    add1 = K.layers.Add()([Act3, A_prev])
+    add1 = K.layers.Add()([norm_3, A_prev])
     res = K.layers.Activation('relu')(add1)
     return res
