@@ -13,5 +13,5 @@ def determinant(matrix):
         return 1
     if len1 == 1 and len2 == 1:
         return matrix[0][0]
-        
-    
+    if len(1) == 2:
+        return (matrix[0][0]) * matrix[1][1] - (matrix[0][1] * matrix[1][0])
