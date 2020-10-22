@@ -37,8 +37,6 @@ def inverse(matrix):
     """ Function that calculates the
         inverse of a matrix """
     len1 = len(matrix)
-    if determinant(matrix) == 0:
-        return None
     if matrix == []:
         raise TypeError("matrix must be a list of lists")
     if type(matrix[0]) is not list or type(matrix) is not list:
@@ -50,6 +48,8 @@ def inverse(matrix):
             raise TypeError("matrix must be a list of lists")
         if len(matrix[i]) != len1:
             raise ValueError("matrix must be a non-empty square matrix")
+    if determinant(matrix) == 0:
+        return None
     if len1 == 1:
         return [[1/determinant(matrix)]]
     else:
