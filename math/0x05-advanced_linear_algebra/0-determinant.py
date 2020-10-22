@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+""" determinat """
+
+
 def determinant(matrix):
     """ Function that calculates the determinant of a matrix """
     len1, len2 = len(matrix), len(matrix[0])
