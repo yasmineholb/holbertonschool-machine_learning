@@ -51,7 +51,7 @@ def inverse(matrix):
     if determinant(matrix) == 0:
         return None
     if len1 == 1:
-        return [[1 / matrix[0][0]]]
+        return [[1 / determinant(matrix)]]
     else:
         mat = []
         for i in range(len1):
