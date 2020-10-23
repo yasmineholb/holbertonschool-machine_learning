@@ -71,11 +71,10 @@ def inverse(matrix):
     for i in range(len(mat)):
         for j in range(len(mat)):
             mat[i][j] *= (-1) ** (i+j)
-    else:
-        new2 = []
-        for i in range(len(mat)):
-            n2 = []
-            for j in range(len(mat)):
-                n2.append((1 / determinant(matrix) * (mat[j][i])))
+    new2 = []
+    for i in range(len(mat)):
+        n2 = []
+        for j in range(len(mat)):
+            n2.append(mat[j][i] * (1 / determinant(matrix)))
             new2.append(n2)
         return new2
