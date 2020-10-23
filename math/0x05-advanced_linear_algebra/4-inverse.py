@@ -40,7 +40,7 @@ def inverse(matrix):
     if matrix == []:
         raise TypeError("matrix must be a list of lists")
     if matrix == [[]]:
-        raise TypeError("matrix must be a non-empty square matrix")
+        raise ValueError("matrix must be a non-empty square matrix")
     if type(matrix[0]) is not list or type(matrix) is not list:
         raise TypeError("matrix must be a list of lists")
     elif len(matrix[0]) != len1:
