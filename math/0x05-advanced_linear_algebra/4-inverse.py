@@ -69,9 +69,9 @@ def inverse(matrix):
                 s += 1
             mat.append(t)
     dett = (1 / determinant(matrix))
-    for i in range(len(mat)):
-        for j in range(len(mat)):
-            mat[i][j] *= (-1) ** (i+j) * dett
+    for i in range(len1):
+        for j in range(len1):
+            mat[i][j] *= ((-1) ** (i+j)) * dett
     new2 = []
     for i in range(len(mat)):
         n2 = []
