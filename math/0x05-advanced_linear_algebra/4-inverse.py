@@ -33,73 +33,12 @@ def determinant(matrix):
         return S
 
 
-def cofactor(matrix):
-    """ Function that calculates the cofactor matrix of a matrix """
-    len1 = len(matrix)
-    if matrix == [[]]:
-        raise ValueError("matrix must be a non-empty square matrix")
-    if type(matrix[0]) is not list or type(matrix) is not list:
-        raise TypeError("matrix must be a list of lists")
-    elif len(matrix[0]) != len1:
-        raise ValueError("matrix must be a non-empty square matrix")
-    for i in range(1, len1):
-        if type(matrix[i]) is not list:
-            raise TypeError("matrix must be a list of lists")
-        if len(matrix[i]) != len1:
-            raise ValueError("matrix must be a non-empty square matrix")
-    if len1 == 1 and len(matrix[0]) == 1:
-        return [[1]]
-    else:
-        S = [[0 for i in range(len1)]for j in range(len1)]
-        for i in range(len1):
-            for j in range(len1):
-                a = list(range(len1))
-                b = list(range(len1))
-                a.pop(i)
-                b.pop(j)
-                S[i][j] = ((-1) ** (i+j)) * determinant(
-                    [[matrix[i][j] for j in b]
-                     for i in a])
-        return S
-
-
-def matrix_transpose(matrix):
-    """ transpose"""
-    len1, len2 = len(matrix), len(matrix[0])
-    s = []
-    for i in range(len2):
-        m = []
-        for j in range(len1):
-            m.append(matrix[j][i])
-        s.append(m)
-    return(s)
-
-
-def adjugate(matrix):
-    """ Function that calculates the adjugate matrix of a matrix """
-    len1 = len(matrix)
-    if matrix == [[]]:
-        raise ValueError("matrix must be a non-empty square matrix")
-    if type(matrix[0]) is not list or type(matrix) is not list:
-        raise TypeError("matrix must be a list of lists")
-    elif len(matrix[0]) != len1:
-        raise ValueError("matrix must be a non-empty square matrix")
-    for i in range(1, len1):
-        if type(matrix[i]) is not list:
-            raise TypeError("matrix must be a list of lists")
-        if len(matrix[i]) != len1:
-            raise ValueError("matrix must be a non-empty square matrix")
-    if len1 == 1 and len(matrix[0]) == 1:
-        return [[1]]
-    else:
-        return matrix_transpose(cofactor(matrix))
-
-
 def inverse(matrix):
-    """ Function that calculates the inverse of a matrix """
+    """ Function that calculates the
+        inverse of a matrix """
     len1 = len(matrix)
-    if matrix == [[]]:
-        raise ValueError("matrix must be a non-empty square matrix")
+    if matrix == []:
+        raise TypeError("matrix must be a list of lists")
     if type(matrix[0]) is not list or type(matrix) is not list:
         raise TypeError("matrix must be a list of lists")
     elif len(matrix[0]) != len1:
@@ -111,9 +50,32 @@ def inverse(matrix):
             raise ValueError("matrix must be a non-empty square matrix")
     if determinant(matrix) == 0:
         return None
-    if len1 == 1 and len(matrix[0]) == 1:
-        return [[1/matrix[0][0]]]
+    if len1 == 1:
+        return [[1.0 / determinant(matrix)]]
     else:
-        d = determinant(matrix)
-        A = adjugate(matrix)
-        return [[A[i][j] / d for j in range(len1)]for i in range(len1)]
+        mat = []
+        for i in range(len1):
+            t = []
+            s = 0
+            while (s < len1):
+                new = []
+                new += [list(j) for j in matrix]
+                new.pop(i)
+                mat1 = []
+                for k in new:
+                    k.pop(s)
+                mat1 += [k for k in new]
+                t.append(determinant(mat1))
+                s += 1
+            mat.append(t)
+    dett = determinant(matrix)
+    for i in range(len1):
+        for j in range(len1):
+            mat[i][j] *= ((-1) ** (i+j)) / dett
+    new2 = []
+    for i in range(len(mat)):
+        n2 = []
+        for j in range(len(mat)):
+            n2.append(mat[j][i])
+        new2.append(n2)
+    return new2
