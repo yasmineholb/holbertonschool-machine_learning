@@ -114,6 +114,6 @@ def inverse(matrix):
     if len1 == 1 and len(matrix[0]) == 1:
         return [[1/matrix[0][0]]]
     else:
-        d = 1/determinant(matrix)
+        d = determinant(matrix)
         A = adjugate(matrix)
-        return [[d * A[i][j] for j in range(len1)]for i in range(len1)]
+        return [[A[i][j] / d for j in range(len1)]for i in range(len1)]
