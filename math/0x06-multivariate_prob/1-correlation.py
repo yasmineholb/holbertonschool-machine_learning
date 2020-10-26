@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """ correlation """
+import numpy as np
 
 
 def correlation(C):
