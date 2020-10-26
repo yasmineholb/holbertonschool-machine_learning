@@ -17,7 +17,6 @@ class MultiNormal:
         xi = data - self.mean
         self.cov = np.matmul(xi, xi.T) / (n - 1)
 
-
     def pdf(self, x):
         """ Funtion that clculates the PDF of a Multivariate
             Normal distribution """
