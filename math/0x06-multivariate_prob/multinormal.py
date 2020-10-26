@@ -16,3 +16,12 @@ class MultiNormal:
         self.mean = np.mean(data, axis=1, keepdims=True)
         xi = data - self.mean
         self.cov = np.matmul(xi, xi.T) / (n - 1)
+
+    def pdf(self, x):
+        """ Function that calculates the PDF at a data point """
+        if not isinstance(x, np.ndarray):
+            raise TypeError("x must be a numpy.ndarray")
+        d, n = x.shape
+        if len(x.shape) != 2 or x.shape[0] != d.shape[1] != 1:
+            raise ValueError("x must have the shape ({d}, 1)")
+        
