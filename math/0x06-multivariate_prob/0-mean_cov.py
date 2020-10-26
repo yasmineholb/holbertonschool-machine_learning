@@ -13,5 +13,5 @@ def mean_cov(X):
         raise ValueError("X must contain multiple data points")
     mean = np.mean(X, axis=0, keepdims=True)
     xi = X - mean
-    cov = np.matmul(xi.T, xi) / (n - 1)
+    cov = np.dot(xi.T, xi) / (n - 1)
     return mean, cov
