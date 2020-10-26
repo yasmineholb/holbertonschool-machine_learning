@@ -6,12 +6,12 @@ import numpy as np
 def correlation(C):
     """ Function that calculates a correlation matrix """
     if not isinstance(C, np.ndarray) or len(C.shape) != 2:
-        raise TypeError("C must be a 2D numpy.ndarray")
-    if C.shape[0] < 2:
-        raise ValueError("C must contain multiple data points")
+        raise TypeError("C must be a numpy.ndarray")
     n, d = C.shape
     if n != d:
-        raise ValueError('C must be a 2D square matrix')
+        raise ValueError("C must be a 2D square matrix")
+    if n == 1:
+        return np.array([[1]])
     M = np.ones((n, n))
     for i in range(n):
         for j in range(n):
