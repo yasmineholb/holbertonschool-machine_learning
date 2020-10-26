@@ -8,7 +8,9 @@ def correlation(C):
     if not isinstance(C, np.ndarray):
         raise TypeError("C must be a numpy.ndarray")
     n, d = C.shape
-    if n != d or len(C.shape) != 2:
+    if len(C.shape) != 2:
+        raise ValueError("C must be a 2D square matrix")
+    if n != d:
         raise ValueError("C must be a 2D square matrix")
     if n == 1:
         return np.array([[1.]])
