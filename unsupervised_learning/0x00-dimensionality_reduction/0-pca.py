@@ -12,4 +12,5 @@ def pca(X, var=0.95):
     while S < var:
         S += V[nd]
         nd += 1
-    return np.linalg.svd(X)[2][:nd, :].T
+    W = np.linalg.svd(X, full_matrices = True, compute_uv = True)[2]
+    return W[:nd, :].T
