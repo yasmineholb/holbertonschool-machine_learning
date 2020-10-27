@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ pca """
 import numpy as np
 
