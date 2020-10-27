@@ -8,6 +8,7 @@ def pca(X, var=0.95):
     tab = np.matmul(X.T, X)
     V = np.linalg.eig(tab)[0]
     V = abs(V)
+    V = np.sqrt(V)
     V = V / sum(V)
     la = []
     S = 0
