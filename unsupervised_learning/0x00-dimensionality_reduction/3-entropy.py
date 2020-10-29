@@ -8,7 +8,6 @@ def HP(Di, beta):
         entropy and P affinities relative to a data point """
     P = np.exp(-Di.copy() * beta)
     sumP = sum(P)
-    H = np.log(sumP) + beta * np.sum(Di * P) / sumP
+    H = np.log2(sumP) + beta * np.sum(Di * P) / sumP
     P = P / sumP
     return H, P
-    
