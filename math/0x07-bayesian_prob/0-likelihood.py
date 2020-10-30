@@ -7,11 +7,11 @@ def likelihood(x, n, P):
     """ Function that  calculates the likelihood
         of obtaining this data given various hypothetical
         probabilities of developing severe side effects """
-    if n < 0:
+    if type(n) is not int or n <= 0:
         raise ValueError("n must be a positive integer")
     if type(x) is not int or x < 0:
-        msg = "x must be an integer that is greater than or equal to 0"
-        raise ValueError(msg)
+        error = "x must be an integer that is greater than or equal to 0"
+        raise ValueError(error)
     if x > n:
         raise ValueError("x cannot be greater than n")
     if not isinstance(P, np.ndarray) or len(P.shape) != 1:
