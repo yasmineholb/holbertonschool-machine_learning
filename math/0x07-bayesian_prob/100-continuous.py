@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """ posterior """
-from scipy import special
+from scipy import special, math
 
 
 def posterior(x, n, p1, p2):
-    """ Function that calculates the posterior
-        probability that the probability of developing severe
-        side effects falls within a specific range given the data """
+    """https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.beta.html
+    Ross p 147"""
     if type(n) is not int or n <= 0:
         raise ValueError("n must be a positive integer")
     if type(x) is not int or x < 0:
@@ -14,9 +13,15 @@ def posterior(x, n, p1, p2):
         raise ValueError(error)
     if x > n:
         raise ValueError("x cannot be greater than n")
-    if type(p1) is not float and p1 < 0 or p1 > 1:
+    if type(p1) is not float or p1 < 0 or p1 > 1:
         raise ValueError("p1 must be a float in the range [0, 1]")
-    if type(p2) is not float and p2 < 0 or p2 > 1:
+    if type(p2) is not float or p2 < 0 or p2 > 1:
         raise ValueError("p2 must be a float in the range [0, 1]")
-    if p1 <= p2:
+    if p2 <= p1:
         raise ValueError("p2 must be greater than p1")
+    cnp = math.factorial(n) / (math.factorial(x) * math.factorial(n - x))
+    g = special.gamma
+    g1 = (g(x + 1) * g(n - x + 1)) / g(n + 2)
+    ib = special.betainc
+    gg = cnp * g1 * (n + 1)
+    return gg * (ib(x + 1, n - x + 1, p2) - ib(x + 1, n - x + 1, p1))
