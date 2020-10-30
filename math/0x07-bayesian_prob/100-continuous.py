@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ posterior """
-import numpy as np
+from scipy import special, math
 
 
 def posterior(x, n, p1, p2):
