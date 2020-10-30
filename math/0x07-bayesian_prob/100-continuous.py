@@ -4,8 +4,8 @@ from scipy import special, math
 
 
 def posterior(x, n, p1, p2):
-    """https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.beta.html
-    Ross p 147"""
+    """https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.beta.
+html Ross p 147"""
     if type(n) is not int or n <= 0:
         raise ValueError("n must be a positive integer")
     if type(x) is not int or x < 0:
