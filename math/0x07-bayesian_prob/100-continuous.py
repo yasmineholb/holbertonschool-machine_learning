@@ -13,9 +13,9 @@ def posterior(x, n, p1, p2):
         raise ValueError(error)
     if x > n:
         raise ValueError("x cannot be greater than n")
-    if type(p1) is not float or p1 < 0 or p1 > 0:
+    if type(p1) is not float or p1 < 0 or p1 > 1:
         raise ValueError("p1 must be a float in the range [0, 1]")
-    if type(p2) is not float or p2 < 0 or p2 > 0:
+    if type(p2) is not float or p2 < 0 or p2 > 1:
         raise ValueError("p2 must be a float in the range [0, 1]")
     if p2 <= p1:
         raise ValueError("p2 must be greater than p1")
@@ -23,5 +23,5 @@ def posterior(x, n, p1, p2):
     g = special.gamma
     g1 = (g(x + 1) * g(n - x + 1)) / g(n + 2)
     ib = special.betainc
-    gg = cnp * g * (n + 1)
+    gg = cnp * g1 * (n + 1)
     return gg * (ib(x + 1, n - x + 1, p2) - ib(x + 1, n - x + 1, p1))
