@@ -8,7 +8,7 @@ def initialize(X, k):
         centroids for K-means """
     if type(X) is not np.ndarray or len(X.shape) != 2:
         return None
-    if k <= 0 or type(k) is not int:
+    if type(k) is not int or k <= 0:
         return None
     mx = np.max(X, axis=0)
     mn = np.min(X, axis=0)
