@@ -22,11 +22,14 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         return None, None
     results = []
     d_vars = []
-    c_min, clss1 = kmeans(X, kmin)
-    var_min = variance(X, c_min)
-    for k in range(kmin, kmax + 1):
-        C, clss = kmeans(X, k)
-        results.append((C, clss))
-        var = variance(X, C)
-        d_vars.append(var_min - var)
-    return results, d_vars
+    try:
+        c_min, clss1 = kmeans(X, kmin)
+        var_min = variance(X, c_min)
+        for k in range(kmin, kmax + 1):
+            C, clss = kmeans(X, k)
+            results.append((C, clss))
+            var = variance(X, C)
+            d_vars.append(var_min - var)
+        return results, d_vars
+    except Exception:
+        return None, None
