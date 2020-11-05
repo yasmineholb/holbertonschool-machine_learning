@@ -9,7 +9,7 @@ def kmeans(X, k, iterations=1000):
         return None
     if type(k) is not int or k <= 0:
         return None
-    if iterations < 0:
+    if iterations <= 0:
         return None
     mx = np.max(X, axis=0)
     mn = np.min(X, axis=0)
