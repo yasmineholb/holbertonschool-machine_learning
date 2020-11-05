@@ -6,11 +6,11 @@ import numpy as np
 def kmeans(X, k, iterations=1000):
     """ Function that performs K-means on a dataset """
     if type(X) is not np.ndarray or len(X.shape) != 2:
-        return None
+        return None, None
     if type(k) is not int or k <= 0:
-        return None
+        return None, None
     if iterations <= 0:
-        return None
+        return None, None
     mx = np.max(X, axis=0)
     mn = np.min(X, axis=0)
     n, d = X.shape
