@@ -15,7 +15,7 @@ def kmeans(X, k, iterations=1000):
     mn = np.min(X, axis=0)
     n, d = X.shape
     C = np.random.uniform(low=mn, high=mx, size=(k, d))
-    C_copy = np.copy(C)
+    copy_c = np.copy(C)
     for i in range(iterations):
         C1 = C[:, np.newaxis]
         dist = np.linalg.norm((X - C1), axis=2)
@@ -27,7 +27,7 @@ def kmeans(X, k, iterations=1000):
                 C[j] = (X[clss == j].mean(axis=0))
         dist = np.linalg.norm((X - C1), axis=2)
         clss = dist.argmin(axis=0)
-        if (C_copy == C).all():
+        if (copy_c == C).all():
             break
-        C_copy = np.copy(C)
+        copy_c = np.copy(C)
     return C, clss
