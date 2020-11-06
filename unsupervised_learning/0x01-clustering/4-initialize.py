@@ -9,7 +9,7 @@ def initialize(X, k):
         variables for a Gaussian Mixture Model """
     if type(X) is not np.ndarray or len(X.shape) != 2:
         return None, None, None
-    if type(k) is not int or k < 0:
+    if type(k) is not int or k <= 0:
         return None, None, None
     m, clss = kmeans(X, k)
     pi = np.full(shape=k, fill_value=1 / k)
