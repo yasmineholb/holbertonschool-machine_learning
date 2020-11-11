@@ -16,6 +16,6 @@ def regular(P):
             return None
         else:
             a = np.abs(np.transpose(VP[1][:, s]))
-            return a / np.sum(a)
+            return np.array([a / np.sum(a)])
     else:
         return None
