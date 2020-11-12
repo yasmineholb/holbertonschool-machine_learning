@@ -29,8 +29,5 @@ def absorbing(P):
         QI = np.eye(n - j) - Q
         if np.linalg.det(QI) == 0:
             return False
-        #B = np.matmul(np.linalg.inv(QI), R)
-        #if np.min(np.min(B)) == 0:
-        #    return False
         else:
             return True
