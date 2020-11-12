@@ -20,12 +20,8 @@ def absorbing(P):
             while(P[n - 1 - j, n - 1 - j] == 1):
                 j += 1
             if i < n - j - 1:
-                S = np.eye(n)
-                S[i, i] = 0
-                S[n - j - 1, n - j - 1] = 0
-                S[i, n - j - 1] = 1
-                S[n - j - 1, i] = 1
-                P = np.matmul(S, np.matmul(P, S))
+                P[[i, n - j - 1], :] = P[[n - j - 1, i], :]
+                P[:, [i, n - j - 1]] = P[:, [n - j - 1, i]]
                 j += 1
         j = len(u[0])
         Q = P[0:n - j, 0:n - j]
@@ -42,3 +38,4 @@ def absorbing(P):
             if test == j:
                 return False
             return True
+        
