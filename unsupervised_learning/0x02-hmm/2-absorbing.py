@@ -38,4 +38,3 @@ def absorbing(P):
             if test == j:
                 return False
             return True
-        
