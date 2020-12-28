@@ -33,7 +33,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
                 hidden_layers[i], activation='relu')(input_l)
         else:
             decc = keras.layers.Dense(
-                hidden_layers[i], activation='relu')(dec)
+                hidden_layers[i], activation='relu')(decc)
     decc = keras.layers.Dense(input_dims, activation='sigmoid')(decc)
     dec = keras.models.Model(input_l, decc)
     dec.summary()
