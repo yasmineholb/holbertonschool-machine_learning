@@ -54,6 +54,7 @@ class BayesianOptimization:
             res = np.argmin(self.gp.Y)
         else:
             res = np.argmax(self.gp.Y)
+        self.gp.X = self.gp.X[:-1]
         aq = self.gp.X[res]
         aqf = self.gp.Y[res]
         return aq, aqf
