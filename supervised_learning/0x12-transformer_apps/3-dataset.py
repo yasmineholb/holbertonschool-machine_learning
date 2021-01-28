@@ -16,8 +16,8 @@ class Dataset():
             return tf.logical_and(tf.size(x) <= max_length,
                                   tf.size(y) <= max_length)
         exp, metadata = tfds.load('ted_hrlr_translate/pt_to_en',
-                                       with_info=True,
-                                       as_supervised=True)
+                                  with_info=True,
+                                  as_supervised=True)
         self.data_train = exp['train']
         self.data_valid = exp['validation']
         self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
