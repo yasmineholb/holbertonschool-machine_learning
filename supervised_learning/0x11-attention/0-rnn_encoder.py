@@ -21,12 +21,12 @@ class RNNEncoder(tf.keras.layers.Layer):
         """ Function that initializes the hidden
             states for the RNN cell to a tensor of zeros """
         initializer = tf.keras.initializers.Zeros()
-        hiddenQ = initializer(shape=(self.batch, self.units))
-        return hiddenQ
+        hidden = initializer(shape=(self.batch, self.units))
+        return hidden
 
     def call(self, x, initial):
         """ Function that returns outputs, hidden"""
-        embedding = self.embedding(x)
-        outputs, last_hiddenQ = self.gru(embedding,
-                                         initial_state=initial)
-        return outputs, last_hiddenQ
+        emb = self.embedding(x)
+        outputs, hidden = self.gru(emb,
+                                   initial_state=initial)
+        return outputs, hidden
