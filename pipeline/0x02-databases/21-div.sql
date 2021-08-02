@@ -1,21 +1,14 @@
---  script that creates a function SafeDiv
+-- SQL script that creates a function SafeDiv that divides (and returns) the first
+
 DELIMITER $$
-DROP FUNCTION IF EXISTS SafeDiv;
-CREATE FUNCTION SafeDiv (f_1 FLOAT, f_2 FLOAT)
-RETURNS FLOAT
-DETERMINISTIC
-BEGIN
-    DECLARE answer FLOAT;
-
-    IF f_2 = 0 THEN
-        SET answer = 0;
-    ELSEIF IFNULL(f_2, 0) THEN
-        SET answer = 0;
-    ELSE
-        SET answer = f_1 / f_2;
-    END IF;
-
-    RETURN(answer);
-END;
-$$
+CREATE FUNCTION SafeDiv(a INT, b INT)
+    RETURNS FLOAT
+    BEGIN
+    DECLARE result FLOAT;
+        SET result = 0;
+        IF b <> 0 THEN
+            SET result = a / b;
+        END IF;
+        RETURN result;
+END $$
 DELIMITER ;
