@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Get requests"""
+""" Can I join? """
 import requests
 
 
