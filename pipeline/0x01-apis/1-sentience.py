@@ -12,7 +12,7 @@ def sentientPlanets():
         response = requests.get(req, headers={'Accept': 'application/json'})
         for pl in response.json()['results']:
             if pl["homeworld"] != "n/a" and pl["homeworld"] is not None:
-                Hworls = prequests.get(specie['homeworld'])
-                Hplanets.append(homeworld.json()['name'])
+                Hworls = prequests.get(species['homeworld'])
+                Hplanets.append(Hworls.json()['name'])
         req = response.json()['next']
     return Hplanets
