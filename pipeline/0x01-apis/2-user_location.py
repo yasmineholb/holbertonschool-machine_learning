@@ -8,7 +8,7 @@ import requests
 if __name__ == '__main__':
     ln = sys.argv[1]
     req = requests.get(ln)
-    js = r.json()
+    js = req.json()
     if req.status_code == 403:
         lt = req.headers["X-Ratelimit-Reset"]
         x = (int(lt) - int(time.time())) / 60
