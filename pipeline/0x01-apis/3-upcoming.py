@@ -1,26 +1,39 @@
 #!/usr/bin/env python3
-"""  What will be next? """
+
+
+""" script that displays the upcoming
+    launch with these information """
+
 import requests
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     url = "https://api.spacexdata.com/v4/launches/upcoming"
     r = requests.get(url)
-    launches = r.json()
-    date = float('inf')
-    for i, launch in enumerate(launches):
-        if date > launch["date_unix"]:
-            date = launch["date_unix"]
-            index = i
-    n = launches[index]["name"]
-    d = launches[index]["date_local"]
-    r_id = launches[index]["rocket"]
-    url = "https://api.spacexdata.com/v4/rockets/{}".format(r_id)
-    r_name = requests.get(url).json()["name"]
-    lp_id = launches[index]["launchpad"]
-    url = "https://api.spacexdata.com/v4/launchpads/{}".format(lp_id)
-    lp = requests.get(url).json()
-    lp_name = lp["name"]
-    lp_loc = lp["locality"]
-    print(n + " (" + d + ") " + r_name + " - " + lp_name + " (" + lp_loc + ")")
+
+    values = r.json()
+    values.sort(key=lambda x: x["date_unix"])
+    value = values[0]
+
+    # launch and date
+    launch_name = value["name"]
+    date = value["date_local"]
+
+    # rocket
+    rocket_id = value["rocket"]
+    r = requests.get(
+        "https://api.spacexdata.com/v4/rockets/{}".format(rocket_id))
+    rocket_values = r.json()
+    rocket_name = rocket_values["name"]
+
+    # launchpad
+    launchpad_id = value["launchpad"]
+    r = requests.get(
+        "https://api.spacexdata.com/v4/launchpads/{}".format(launchpad_id))
+    launchpad_values = r.json()
+    launchpad_name = launchpad_values["name"]
+    launchpad_locality = launchpad_values["locality"]
+
+    print("{} ({}) {} - {} ({})".format(launch_name, date,
+                                        rocket_name, launchpad_name,
+                                        launchpad_locality))
