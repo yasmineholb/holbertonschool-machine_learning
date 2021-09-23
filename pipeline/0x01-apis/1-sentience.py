@@ -4,15 +4,20 @@ import requests
 
 
 def sentientPlanets():
-    """ method that returns the list of names
+    """ Function that returns the list of names
     of the home planets of all sentient species """
-    Hplanets = []
-    req = 'https://swapi-api.hbtn.io/api/species/'
-    while req is not None:
-        response = requests.get(req, headers={'Accept': 'application/json'})
-        for pl in response.json()['results']:
-            if pl["homeworld"] != "n/a" and pl["homeworld"] is not None:
-                Hworls = prequests.get(species['homeworld'])
-                Hplanets.append(Hworls.json()['name'])
-        req = response.json()['next']
-    return Hplanets
+    ln = "https://swapi-api.hbtn.io/api/species/"
+    plt = []
+    while ln is not None:
+        r = requests.get(ln)
+        results = r.json()["results"]
+        for specie in results:
+            if (specie["designation"] == "sentient" or
+                    specie["classification"] == "sentient"):
+
+                plt_url = specie["homeworld"]
+                if plt_url is not None:
+                    p = requests.get(plt_url).json()
+                    plt.append(p["name"])
+        ln = r.json()["next"]
+    return plt
