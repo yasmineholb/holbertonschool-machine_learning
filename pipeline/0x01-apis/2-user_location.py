@@ -5,18 +5,18 @@ import time
 import requests
 
 
-if __name__ == '__main__':
-    ln = sys.argv[1]
-    req = requests.get(ln)
-    js = req.json()
-    if req.status_code == 403:
-        lt = req.headers["X-Ratelimit-Reset"]
-        x = (int(lt) - int(time.time())) / 60
-        print("Reset in {} min".format(int(x)))
-    if req.status_code == 200:
+if __name__ == "__main__":
+    url = sys.argv[1]
+    r = requests.get(url)
+    r_json = r.json()
+    if r.status_code == 403:
+        limit = r.headers['X-Ratelimit-Reset']
+        limit = int((int(limit) - int(time.time())) / 60)
+        print('Reset in {} min'.format(limit))
+    elif r.status_code == 200:
         try:
-            print(js["location"])
+            print(r_json["location"])
         except KeyError:
             print("Not found")
-    if req.status_code == 404:
+    else:
         print("Not found")
