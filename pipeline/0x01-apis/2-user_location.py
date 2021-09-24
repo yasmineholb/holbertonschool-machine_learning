@@ -6,7 +6,6 @@ import time
 
 
 if __name__ == '__main__':
-
     ln = sys.argv[1]
     js = {'Accept': 'application/vnd.github.v3+json'}
     r = requests.get(ln, params=js)
