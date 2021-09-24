@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
-""" Rate me is you can! """
+'''2. Rate me is you can!'''
 import sys
 import requests
-import time
+from datetime import datetime
+
+
+def loc(url):
+    '''returns the location of a specific user'''
+    headers = {'Accept': 'application/vnd.github.v3+json'}
+    request = requests.get(url)
+    if request.status_code == 403:
+        retry = request.headers['X-Ratelimit-Reset']
+        seconds = int(retry) - int(datetime.now().timestamp())
+        print('Reset in {} min'.format(seconds // 60))
+    elif request.status_code == 404:
+        print('Not found')
+    elif request.status_code == 200:
+        print(request.json()['location'])
 
 
 if __name__ == '__main__':
-
-    url = sys.argv[1]
-    payload = {'Accept': 'application/vnd.github.v3+json'}
-    r = requests.get(url, params=payload)
-    if r.status_code == 403:
-        limit = r.headers["X-Ratelimit-Reset"]
-        x = (int(limit) - int(time.time())) / 60
-        print("Reset in {} min".format(int(x)))
-    if r.status_code == 200:
-        location = r.json()["location"]
-        print(location)
-    if r.status_code == 404:
-        print("Not found")
+    loc(sys.argv[1])
