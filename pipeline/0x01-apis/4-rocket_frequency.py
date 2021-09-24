@@ -4,6 +4,7 @@ import requests
 
 
 if __name__ == '__main__':
+    """ How many by rocket? Function """
     ln = "https://api.spacexdata.com/v4/launches"
     r = requests.get(ln)
     launches = r.json()
